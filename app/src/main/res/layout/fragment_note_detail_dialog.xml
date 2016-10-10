@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="笔记详情"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:layout_centerInParent="true"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        >
+        <TextView
+            android:id="@+id/tv_notedetail_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="编辑时间:"
+            android:layout_centerVertical="true"
+            android:textSize="15sp"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        >
+        <TextView
+            android:id="@+id/tv_notedetail_subject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="笔记主题:"
+            android:layout_centerVertical="true"
+            android:textSize="15sp"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        >
+        <TextView
+            android:id="@+id/tv_notedetail_body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="笔记内容:"
+            android:textSize="15sp"
+            android:layout_centerVertical="true"
+            />
+    </RelativeLayout>
+
+
+</LinearLayout>

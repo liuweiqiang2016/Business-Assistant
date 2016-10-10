@@ -1,0 +1,107 @@
+<resources>
+    <string name="app_name">Business Assistant</string>
+    <string-array name="items_txt">
+        <item>创建新订单</item>
+        <item>未完成订单</item>
+        <item>订单查询</item>
+        <item>项目编辑</item>
+        <item>日常开销</item>
+        <item>开销查询</item>
+        <item>财务分析</item>
+        <item>客户添加</item>
+        <item>客户查询</item>
+        <item>数据备份</item>
+        <item>工作笔记</item>
+        <item>笔记查询</item>
+        <item>用户手册</item>
+        <item>关于</item>
+        <item>退出</item>
+    </string-array>
+
+    <string-array name="model_name">
+        <item>西装上衣</item>
+        <item>毛衣</item>
+        <item>短大衣</item>
+        <item>长大衣</item>
+        <item>睡衣(夏)</item>
+        <item>睡衣(冬)</item>
+        <item>羽绒服(长)</item>
+        <item>羽绒服(短)</item>
+        <item>棉衣(长)</item>
+        <item>棉衣(中)</item>
+        <item>棉衣(短)</item>
+        <item>床单/被罩(学生)</item>
+        <item>裤子+外套+秋衣(学生、春秋)</item>
+        <item>薄内衣(学生、冬)</item>
+        <item>保暖内衣(学生、冬)</item>
+        <item>背包(学生)</item>
+    </string-array>
+    <integer-array name="model_price">
+        <item>6</item>
+        <item>20</item>
+        <item>25</item>
+        <item>30</item>
+        <item>5</item>
+        <item>6</item>
+        <item>30</item>
+        <item>25</item>
+        <item>25</item>
+        <item>20</item>
+        <item>15</item>
+        <item>7</item>
+        <item>6</item>
+        <item>5</item>
+        <item>6</item>
+        <item>10</item>
+    </integer-array>
+
+    <string-array name="cost_name">
+        <item>房租</item>
+        <item>水费</item>
+        <item>电费</item>
+        <item>汽油费</item>
+        <item>耗材费</item>
+        <item>通讯费</item>
+        <item>其他</item>
+    </string-array>
+
+    <string-array name="customer_info">
+        <item>客户名称:</item>
+        <item>联系方式:</item>
+        <item>客户住址:</item>
+        <item>备注信息:</item>
+    </string-array>
+    <string-array name="customer_info_hint">
+        <item>必填且不可为空格</item>
+        <item>选填</item>
+        <item>选填</item>
+        <item>选填</item>
+    </string-array>
+    <string-array name="sp_states">
+        <item>全部</item>
+        <item>未处理</item>
+        <item>已完成</item>
+    </string-array>
+    <string-array name="sp_source">
+        <item>全部</item>
+        <item>订单生成</item>
+        <item>自主添加</item>
+    </string-array>
+    <string-array name="sp_datas">
+        <item>收入</item>
+        <item>开支</item>
+        <item>利润</item>
+        <item>客户</item>
+    </string-array>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_add">AddActivity</string>
+    <string name="title_edititem_list">EditItems</string>
+    <string name="title_edititem_detail">EditItem Detail</string>
+    <string name="create_moneytxt">总金额:</string>
+    <string name="tv_orderinfo_null">暂无未完成订单需要处理</string>
+    <string name="tv_scheduleinfo_null">暂无日程安排</string>
+    <string name="title_activity_detailorder">订单详情</string>
+</resources>

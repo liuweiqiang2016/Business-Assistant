@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="查询条件"
+            android:textColor="@android:color/black"
+            android:layout_centerInParent="true"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        >
+        <TextView
+            android:id="@+id/tv_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开销类型："
+            android:textSize="16sp"
+            android:layout_centerVertical="true"
+            />
+        <Spinner
+            android:id="@+id/sp_cost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tv_setting"
+            android:layout_centerVertical="true"
+            ></Spinner>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
+        android:gravity="center_horizontal"
+        android:text="开销时间查询区间"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开始时间："
+            android:textSize="16sp"
+            />
+
+        <EditText
+            android:id="@+id/et_cost_start"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="选填"
+            android:textSize="16sp"
+            android:focusable="false"
+            android:clickable="true"
+            android:onClick="OnStart"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="结束时间："
+            android:textSize="16sp"
+            />
+
+        <EditText
+            android:id="@+id/et_cost_end"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="选填"
+            android:textSize="16sp"
+            android:focusable="false"
+            android:clickable="true"
+            android:onClick="OnEnd"
+            />
+    </LinearLayout>
+
+</LinearLayout>

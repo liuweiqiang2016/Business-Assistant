@@ -177,7 +177,7 @@ public class ChartUtil {
 
         ArrayList<String> xValues = new ArrayList<String>();  //xVals用来表示每个饼块上的内容
         for (int i=0;i<types.size();i++){
-            xValues.add(types.get(i));  //饼块上显示各种类型名称
+            xValues.add(types.get(i)+"("+typeCosts.get(i)+"元)");  //饼块上显示各种类型名称
         }
         ArrayList<Entry> yValues = new ArrayList<Entry>();  //yVals用来表示封装每个饼块的实际数据
         // 饼图数据

@@ -139,7 +139,7 @@ public class DataAnalyzeActivity extends AppCompatActivity implements DataSettin
                     for (int i=0;i<size;i++){
                         dayIncomes.add(QueryDayIncome(days.get(i)));
                     }
-                    LineData mLineData = ChartUtil.getLineData(days,dayIncomes,dateTypes[position]+"数据统计");
+                    LineData mLineData = ChartUtil.getLineData(days,dayIncomes,start+"至"+end+"期间内收入数据统计");
                     ChartUtil.showLineChart(mLineChart, mLineData, Color.rgb(114, 188, 223));
                     break;
                 //特定时间段内的开支数据展示、饼图

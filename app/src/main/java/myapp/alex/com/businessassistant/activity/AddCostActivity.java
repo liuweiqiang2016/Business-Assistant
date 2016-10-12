@@ -27,7 +27,7 @@ public class AddCostActivity extends AppCompatActivity {
 
     View customView;
     TextView title,tv_cost_id;
-    //数据库ss
+    //数据库
     private DbUtils db;
     List<CostTypeModel> typeModelList;
 

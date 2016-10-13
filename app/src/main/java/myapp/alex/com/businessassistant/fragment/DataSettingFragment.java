@@ -30,24 +30,24 @@ public class DataSettingFragment extends DialogFragment {
 
     private EditText et_start, et_end;
     private String mStart,mEnd;
-    private Spinner spinner;
-    private int mPosition;
+//    private Spinner spinner;
+//    private int mPosition;
 //    private ArrayList<String> mStringList;
     DateTimePickDialogUtil dialog;
 
 //    private static final String TYPES = "param1";
     private static final String START = "param2";
     private static final String END = "param3";
-    private static final String POSITION = "param4";
+//    private static final String POSITION = "param4";
 
 
     // TODO: Rename and change types and number of parameters
-    public static DataSettingFragment newInstance(String mStart, String mEnd, int mPosition) {
+    public static DataSettingFragment newInstance(String mStart, String mEnd) {
         DataSettingFragment fragment = new DataSettingFragment();
         Bundle args = new Bundle();
         args.putString(START,mStart);
         args.putString(END, mEnd);
-        args.putInt(POSITION,mPosition);
+//        args.putInt(POSITION,mPosition);
 //        args.putStringArrayList(TYPES,stringList);
         fragment.setArguments(args);
         return fragment;
@@ -59,7 +59,7 @@ public class DataSettingFragment extends DialogFragment {
         if (getArguments() != null) {
             mStart = getArguments().getString(START);
             mEnd = getArguments().getString(END);
-            mPosition=getArguments().getInt(POSITION);
+//            mPosition=getArguments().getInt(POSITION);
 //            mStringList=getArguments().getStringArrayList(TYPES);
         }
     }
@@ -69,7 +69,7 @@ public class DataSettingFragment extends DialogFragment {
     //传入参数为：开始时间、结束时间、选择类型
     public interface DataSettingInputListener
     {
-        void onDataSettingInputComplete(String input_start, String input_end, int input_position);
+        void onDataSettingInputComplete(String input_start, String input_end);
     }
     @Nullable
     @Override
@@ -87,11 +87,11 @@ public class DataSettingFragment extends DialogFragment {
         View view = inflater.inflate(R.layout.fragment_datasetting_dialog, null);
         et_start = (EditText) view.findViewById(R.id.et_data_start);
         et_end = (EditText) view.findViewById(R.id.et_data_end);
-        spinner= (Spinner) view.findViewById(R.id.sp_data);
-        ArrayAdapter<String> adapter=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item,getResources().getStringArray(R.array.sp_datas));
-        //adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
-        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+//        spinner= (Spinner) view.findViewById(R.id.sp_data);
+//        ArrayAdapter<String> adapter=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item,getResources().getStringArray(R.array.sp_datas));
+//        //adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+//        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+//        spinner.setAdapter(adapter);
 
         et_start.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,7 +178,7 @@ public class DataSettingFragment extends DialogFragment {
                                             e.printStackTrace();
                                         }
                                     }else{
-                                        listener.onDataSettingInputComplete(start,end,spinner.getSelectedItemPosition());
+                                        listener.onDataSettingInputComplete(start,end);
                                         try
                                         {
                                             Field field = dialog.getClass()
@@ -227,7 +227,7 @@ public class DataSettingFragment extends DialogFragment {
 
         et_start.setText(mStart);
         et_end.setText(mEnd);
-        spinner.setSelection(mPosition);
+//        spinner.setSelection(mPosition);
 
     };
 

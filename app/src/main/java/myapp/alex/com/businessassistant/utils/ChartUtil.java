@@ -135,7 +135,8 @@ public class ChartUtil {
         // mChart.setDrawXValues(true);
 
         // enable rotation of the chart by touch
-        pieChart.setRotationEnabled(true); // 可以手动旋转
+//        pieChart.setRotationEnabled(true); // 可以手动旋转
+        pieChart.setRotationEnabled(false); // 禁止旋转
 
         // display percentage values
         pieChart.setUsePercentValues(true);  //显示成百分比
@@ -151,6 +152,8 @@ public class ChartUtil {
 //        pieChart.setCenterText("Quarterly Revenue");  //饼状图中间的文字
         pieChart.setCenterText(centerText);  //饼状图中间的文字
 
+//        pieChart.setDrawHoleEnabled(false);//是否展示同心圆
+
         //设置数据
         pieChart.setData(pieData);
 
@@ -160,9 +163,11 @@ public class ChartUtil {
 
         Legend mLegend = pieChart.getLegend();  //设置比例图
         mLegend.setPosition(Legend.LegendPosition.RIGHT_OF_CHART);  //最右边显示
-//    mLegend.setForm(LegendForm.LINE);  //设置比例图的形状，默认是方形
+//      mLegend.setForm(LegendForm.LINE);  //设置比例图的形状，默认是方形
         mLegend.setXEntrySpace(7f);
         mLegend.setYEntrySpace(5f);
+
+        mLegend.setEnabled(false);//设置比例图不显示，默认为显示
 
         pieChart.animateXY(1000, 1000);  //设置动画
         // mChart.spin(2000, 0, 360);

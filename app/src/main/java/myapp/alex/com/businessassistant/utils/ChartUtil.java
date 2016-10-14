@@ -4,11 +4,15 @@ import android.content.Context;
 import android.graphics.Color;
 import android.util.DisplayMetrics;
 
+import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -242,5 +246,76 @@ public class ChartUtil {
         PieData pieData = new PieData(xValues, pieDataSet);
 
         return pieData;
+    }
+
+    public static  void showBarChart(BarChart barChart, BarData barData) {
+        barChart.setDrawBorders(false);  ////是否在折线图上添加边框
+        barChart.setDescription("");// 数据描述
+        // 如果没有数据的时候，会显示这个，类似ListView的EmptyView
+        barChart.setNoDataTextDescription("You need to provide data for the chart.");
+
+        barChart.setDrawGridBackground(false); // 是否显示表格颜色
+        barChart.setGridBackgroundColor(Color.WHITE & 0x70FFFFFF); // 表格的的颜色，在这里是是给颜色设置一个透明度
+
+        barChart.setTouchEnabled(true); // 设置是否可以触摸
+
+        barChart.setDragEnabled(true);// 是否可以拖拽
+        barChart.setScaleEnabled(true);// 是否可以缩放
+
+        barChart.setPinchZoom(false);//
+
+//    barChart.setBackgroundColor();// 设置背景
+
+        barChart.setDrawBarShadow(true);
+
+        barChart.setHorizontalScrollBarEnabled(true);
+
+        barChart.setData(barData); // 设置数据
+
+        Legend mLegend = barChart.getLegend(); // 设置比例图标示
+
+        mLegend.setForm(Legend.LegendForm.CIRCLE);// 样式
+        mLegend.setFormSize(6f);// 字体
+        mLegend.setTextColor(Color.BLACK);// 颜色
+
+//    X轴设定
+    XAxis xAxis = barChart.getXAxis();
+    xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+
+        barChart.animateX(2500); // 立即执行的动画,x轴
+    }
+
+    public static BarData getBarData(List<String> names,List<Float> list,String des) {
+        ArrayList<String> xValues = new ArrayList<String>();
+//        for (int i = 0; i < count; i++) {
+//            xValues.add("第" + (i + 1) + "季度");
+//        }
+        for (int i = 0; i < names.size(); i++) {
+            xValues.add(names.get(i));
+        }
+
+        ArrayList<BarEntry> yValues = new ArrayList<BarEntry>();
+
+//        for (int i = 0; i < count; i++) {
+//            float value = (float) (Math.random() * range/*100以内的随机数*/) + 3;
+//            yValues.add(new BarEntry(value, i));
+//        }
+
+        for (int i = 0; i < list.size(); i++) {
+            yValues.add(new BarEntry(list.get(i), i));
+        }
+
+        // y轴的数据集合
+//        BarDataSet barDataSet = new BarDataSet(yValues, "测试饼状图");
+
+        BarDataSet barDataSet = new BarDataSet(yValues,des);
+        barDataSet.setColor(Color.rgb(114, 188, 223));
+
+        ArrayList<BarDataSet> barDataSets = new ArrayList<BarDataSet>();
+        barDataSets.add(barDataSet); // add the datasets
+
+        BarData barData = new BarData(xValues, barDataSets);
+
+        return barData;
     }
 }

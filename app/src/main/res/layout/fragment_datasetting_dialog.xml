@@ -12,7 +12,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="查询条件"
+            android:text="时间查询区间"
             android:textColor="@android:color/black"
             android:layout_centerInParent="true"
             />
@@ -23,6 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
+        android:visibility="gone"
         >
         <TextView
             android:id="@+id/tv_setting"
@@ -48,6 +49,7 @@
         android:layout_marginBottom="3dp"
         android:gravity="center_horizontal"
         android:text="时间查询区间"
+        android:visibility="gone"
         />
 
     <LinearLayout

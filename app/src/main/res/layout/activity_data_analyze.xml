@@ -36,18 +36,115 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/data_linechart"
-        android:visibility="gone"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </com.github.mikephil.charting.charts.LineChart>
-    <com.github.mikephil.charting.charts.PieChart
-        android:id="@+id/data_piechart"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </com.github.mikephil.charting.charts.PieChart>
+        <LinearLayout
+            android:id="@+id/data_lin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:layout_marginTop="10dp"
+                android:text="1、收入分析"
+                />
+            <TextView
+                android:layout_marginBottom="5dp"
+                android:id="@+id/data_tv_income"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                android:text="本段时间内，收入总额为124.45元，其中每天的收入如下表所示："
+                />
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/data_linechart"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="20dp"
+                android:layout_height="300dp">
+            </com.github.mikephil.charting.charts.LineChart>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:text="2、支出分析"
+                />
+            <TextView
+                android:layout_marginBottom="5dp"
+                android:id="@+id/data_tv_cost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                android:text="本段时间内，支出总额为124.45元，其中各类支出如下表所示："
+                />
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/data_piechart"
+                android:layout_width="match_parent"
+                android:layout_height="320dp">
+            </com.github.mikephil.charting.charts.PieChart>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:text="3、利润分析"
+                />s
+
+
+            <TextView
+                android:layout_marginBottom="5dp"
+                android:id="@+id/data_tv_profit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                android:text="本段时间内，支出总额为124.45元，收入总额为224.45元，净利润为100元"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:text="4、客户分析"
+                />
+
+            <TextView
+                android:layout_marginBottom="5dp"
+                android:id="@+id/data_tv_customer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                android:text="本段时间内，前来消费的用户共计80人次，其中消费总金额最高的是张三（123,5元），消费频率最多的是李四（3次）具体如下表所示："
+                />
+            
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/data_barchart_money"
+                android:layout_marginBottom="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"></com.github.mikephil.charting.charts.BarChart>
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/data_barchart_count"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"></com.github.mikephil.charting.charts.BarChart>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 
 </LinearLayout>

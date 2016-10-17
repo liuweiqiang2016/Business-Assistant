@@ -30,7 +30,7 @@
         <activity android:name=".activity.AddNoteActivity" />
         <activity android:name=".activity.QueryNoteActivity" />
         <activity android:name=".activity.DataAnalyzeActivity" />
-
+        <activity android:name=".activity.ManualActivity"></activity>
     </application>
 
 </manifest>

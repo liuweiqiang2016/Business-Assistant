@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
                 R.drawable.ic_assessment_amber_700_48dp,
                 R.drawable.ic_folder_shared_green_600_48dp,
                 R.drawable.ic_supervisor_account_blue_a400_48dp,
-                R.drawable.ic_backup_blue_a400_48dp,
+                R.drawable.ic_system_update_blue_a400_48dp,
                 R.drawable.ic_work_deep_purple_600_48dp,
                 R.drawable.ic_import_contacts_amber_700_48dp,
                 R.drawable.ic_library_books_red_a200_48dp,
@@ -243,7 +243,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     case 9:
-                        //数据备份
+                        //版本更新
                         break;
                     case 10:
                         //工作笔记
@@ -257,6 +257,8 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 12:
                         //用户手册
+                        intent.setClass(MainActivity.this,ManualActivity.class);
+                        startActivity(intent);
                         break;
                     case 13:
                         //关于

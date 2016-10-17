@@ -66,6 +66,14 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
                 holder.total.setText("");
             }
         }
+//        if (position==9){
+//            if (mTotal>0){
+//                holder.total.setTextSize(12);
+//                holder.total.setText("新");
+//            }else{
+//                holder.total.setText("");
+//            }
+//        }
 
         // 如果设置了回调，则设置点击事件
         if (mOnItemClickLitener != null) {

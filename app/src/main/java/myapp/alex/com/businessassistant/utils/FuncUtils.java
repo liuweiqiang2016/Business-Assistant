@@ -4,7 +4,13 @@ package myapp.alex.com.businessassistant.utils;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.Environment;
+import android.util.Log;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -20,6 +26,10 @@ public class FuncUtils {
 //    public static final String ID_COST="cost";//开销查询
 //    public static final int TAG_CUSTOMER=2;//客户查询
 //    public static final int TAG_NOTE=3;//笔记查询
+
+    public static final String APP_DIR= Environment.getExternalStorageDirectory()+"/BusinessAssistant/";
+    public static final String APP_UPDATE_URL= "https://raw.githubusercontent.com/liuweiqiang2016/Business-Assistant/master/app/versioninfo.xml";
+
 
     // 获取当前时间
     public static String getTime() {
@@ -118,6 +128,69 @@ public class FuncUtils {
         } catch (Exception e) {
             e.printStackTrace();
             return "1.0";
+        }
+    }
+
+    /**
+     * 解析SDcard xml文件
+     * @param fileName
+     * @return 返回xml文件的inputStream
+     */
+    public static InputStream getInputStreamFromSDcard(String fileName){
+        try {
+            // 路径根据实际项目修改
+            String path = FuncUtils.APP_DIR + "/";
+
+            Log.v("", "path : " + path);
+
+            File xmlFlie = new File(path+fileName);
+
+            InputStream inputStream = new FileInputStream(xmlFlie);
+
+            return inputStream;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 比较软件当前版本与服务器最新版本
+     *
+     * @param localVersion
+     *            软件当前版本为四位 如：1.0.0.0
+     * @param serviceVersion
+     *            服务器最新版本 为四位 如：1.0.11.2
+     * @return
+     */
+    public static boolean compareVersion(String localVersion, String serviceVersion)
+    {
+        try
+        {
+            localVersion = localVersion.replace(".", ",");
+            serviceVersion = serviceVersion.replace(".", ",");
+
+            String[] local = localVersion.trim().split(",");
+            String[] service = serviceVersion.trim().split(",");
+            if (local.length != service.length)
+                return false;
+            for (int i = 0; i < local.length; i++)
+            {
+                int lv = Integer.valueOf(local[i]);
+                int sv = Integer.valueOf(service[i]);
+                if (lv == sv)
+                    continue;
+                if (lv < sv)
+                    return true;
+                else
+                    return false;
+
+            }
+            return false;
+        }
+        catch (Exception e)
+        {
+            return false;
         }
     }
 

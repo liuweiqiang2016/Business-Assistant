@@ -2,11 +2,15 @@ package myapp.alex.com.businessassistant.activity;
 
 import android.Manifest;
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -17,6 +21,10 @@ import com.zhy.m.permission.PermissionDenied;
 import com.zhy.m.permission.PermissionGrant;
 import com.zhy.m.permission.ShowRequestPermissionRationale;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import myapp.alex.com.businessassistant.R;
@@ -28,6 +36,14 @@ import myapp.alex.com.businessassistant.model.ServiceModel;
 import myapp.alex.com.businessassistant.model.VersionInfoModel;
 import myapp.alex.com.businessassistant.utils.FuncUtils;
 import myapp.alex.com.businessassistant.utils.MyDbUtils;
+import myapp.alex.com.businessassistant.utils.OkHttpHelper;
+import myapp.alex.com.businessassistant.utils.ParseXMLUtils;
+import myapp.alex.com.businessassistant.utils.UIProgressResponseListener;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 
 public class MainActivity extends AppCompatActivity implements SoftUpdateFragment.SoftUpdateListener{
@@ -38,6 +54,8 @@ public class MainActivity extends AppCompatActivity implements SoftUpdateFragmen
     private int[] items_img;
     //数据库
     private DbUtils db;
+    private VersionInfoModel versionInfoModel;
+    private SoftUpdateFragment fragment;
 
     private static final int REQUECT_CODE_SDCARD = 1;
     @Override
@@ -241,9 +259,21 @@ public class MainActivity extends AppCompatActivity implements SoftUpdateFragmen
                         break;
                     case 9:
                         //版本更新
-                        VersionInfoModel model=new VersionInfoModel();
-                        SoftUpdateFragment fragment=SoftUpdateFragment.newInstance(model);
+//                        VersionInfoModel model=new VersionInfoModel();
+//                        SoftUpdateFragment fragment=SoftUpdateFragment.newInstance(model);
+//                        fragment.show(getFragmentManager(),"tag");
+                        fragment=SoftUpdateFragment.newInstance(null);
                         fragment.show(getFragmentManager(),"tag");
+                        new AsyncTask<Void,Void,Void>(){
+                            @Override
+                            protected Void doInBackground(Void... params) {
+
+                                //下载xml文件(版本升级信息)
+                                getFile(FuncUtils.APP_UPDATE_URL,FuncUtils.APP_DIR);
+
+                                return null;
+                            }
+                        }.execute();
                         break;
                     case 10:
                         //工作笔记
@@ -282,6 +312,89 @@ public class MainActivity extends AppCompatActivity implements SoftUpdateFragmen
             }
         });
 
+    }
+
+    private Handler mHandler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what==1){
+                //解析版本更新信息xml文件
+                final String fileName =FuncUtils.APP_UPDATE_URL.substring(FuncUtils.APP_UPDATE_URL.lastIndexOf("/") + 1);
+                try {
+                    //防止xml解析时异常
+                    InputStream inputStream=FuncUtils.getInputStreamFromSDcard(fileName);
+                    versionInfoModel= ParseXMLUtils.Parse(inputStream);
+                }catch (Exception e){}
+                finally {
+                    fragment.dismiss();
+                    if (versionInfoModel!=null){
+                        String old_code=FuncUtils.getVersion(MainActivity.this);
+                        //当前版本低于网络版本
+                        if (FuncUtils.compareVersion(old_code,versionInfoModel.getCode())){
+                            versionInfoModel.setCode_old(old_code);
+                            fragment=SoftUpdateFragment.newInstance(versionInfoModel);
+                            fragment.show(getFragmentManager(),"tag");
+                        }else{
+                            Toast.makeText(MainActivity.this,"当前版本已是最新版本，无需更新!",Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                }
+
+            }
+        }
+    };
+
+    /**
+     * 获取文件。
+     *
+     * @param url  地址
+     * @param path 下载的文件地址
+     */
+    private void getFile(final String url, final String path) {
+        final String fileName = url.substring(url.lastIndexOf("/") + 1);
+        OkHttpClient client = new OkHttpClient();
+        client = OkHttpHelper.getOkClient(client, new UIProgressResponseListener() {
+            @Override
+            public void onUIProgressRequest(long allBytes, long currentBytes, boolean done) {
+                float progress = currentBytes * 100f / allBytes;
+                Log.i("MAIN", "onUIProgressRequest: 总长度：" + allBytes + " 当前下载的长度：" + currentBytes + "是否下载完成：" + done + "下载进度：" + progress);
+
+                if (done){
+                    mHandler.sendEmptyMessage(1);
+                }
+
+            }
+        });
+        Request request = new Request.Builder().url(url).get().build();
+        Call call = client.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    InputStream is = response.body().byteStream();
+                    File file = new File(path);
+                    if (!file.exists()) {
+                        file.mkdirs();
+                    }
+                    File downLoad = new File(file, fileName);
+                    FileOutputStream fos = new FileOutputStream(downLoad);
+                    int len = -1;
+                    byte[] buffer = new byte[1024];
+                    while ((len = is.read(buffer)) != -1) {
+                        fos.write(buffer, 0, len);
+                    }
+                    fos.flush();
+                    fos.close();
+                    is.close();
+                }
+            }
+        });
     }
 
     //按返回按钮，退出到手机主界面

@@ -32,7 +32,7 @@ public class MyDbUtils {
 			DaoConfig c = new DaoConfig(context);
 			c.setDbName("BADB");
 			c.setDbVersion(1);
-			c.setSdCardPath(Environment.getExternalStorageDirectory()+"/BusinessAssistant/"+".db/");
+			c.setSdCardPath(FuncUtils.APP_DIR+".db/");
 			db = getDb(c);
 		}
 		return db;

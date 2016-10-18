@@ -3,14 +3,21 @@ package myapp.alex.com.businessassistant.utils;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
+import android.util.Log;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringReader;
+import java.util.ArrayList;
 
 import myapp.alex.com.businessassistant.model.VersionInfoModel;
 
 /**
- * 解析xml
+ * 解析xml，获取省份
+ * 
+ * @author zzp
+ * 
  */
 public class ParseXMLUtils {
 
@@ -53,22 +60,31 @@ public class ParseXMLUtils {
 					break;
 
 				case XmlPullParser.START_TAG:
+					// 解析XML节点数据
+					// 获取当前标签名字
+					// /给当前标签起个名字
 					if (parser.getName().equals("version")) {
+						// book = new Book();
 						version = new VersionInfoModel();
 					} else if (parser.getName().equals("code")) {
 						eventType = parser.next();
+						// book.setId(Integer.parseInt(parser.getText()));
 						version.setCode(parser.getText());
 					} else if (parser.getName().equals("name")) {
 						eventType = parser.next();
+						// book.setId(Integer.parseInt(parser.getText()));
 						version.setName(parser.getText());
 					} else if (parser.getName().equals("size")) {
 						eventType = parser.next();
+						// book.setId(Integer.parseInt(parser.getText()));
 						version.setSize(parser.getText());
 					} else if (parser.getName().equals("des")) {
 						eventType = parser.next();
+						// book.setId(Integer.parseInt(parser.getText()));
 						version.setDes(parser.getText());
 					} else if (parser.getName().equals("link")) {
 						eventType = parser.next();
+						// book.setId(Integer.parseInt(parser.getText()));
 						version.setLink(parser.getText());
 					}
 					break;

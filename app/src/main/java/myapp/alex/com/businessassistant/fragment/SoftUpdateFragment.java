@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import myapp.alex.com.businessassistant.R;
@@ -22,7 +23,8 @@ import myapp.alex.com.businessassistant.model.VersionInfoModel;
 public class SoftUpdateFragment extends DialogFragment {
 
 
-    private TextView old_code,new_code,name,size,des;
+    private TextView old_code,new_code,name,size,des,title;
+    private LinearLayout lin;
     private static VersionInfoModel versionInfoModel;
 
     // TODO: Rename and change types and number of parameters
@@ -62,6 +64,15 @@ public class SoftUpdateFragment extends DialogFragment {
         name= (TextView) view.findViewById(R.id.tv_update_name);
         size= (TextView) view.findViewById(R.id.tv_update_size);
         des= (TextView) view.findViewById(R.id.tv_update_des);
+        title= (TextView) view.findViewById(R.id.tv_update_title);
+        lin= (LinearLayout) view.findViewById(R.id.update_lin);
+
+        if (versionInfoModel==null){
+            title.setText("版本检测中，请稍后...");
+            lin.setVisibility(View.GONE);
+            builder.setView(view);
+            return builder.create();
+        }
 
         initData();
         // Inflate and set the layout for the dialog
@@ -90,6 +101,7 @@ public class SoftUpdateFragment extends DialogFragment {
 
     //赋值数据
     void initData(){
+        title.setText("版本更新");
         old_code.setText("当前版本:V"+versionInfoModel.getCode_old());
         new_code.setText("最新版本:V"+versionInfoModel.getCode());
         name.setText("应用名称:"+versionInfoModel.getName());

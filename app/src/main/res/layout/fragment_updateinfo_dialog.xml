@@ -10,6 +10,7 @@
         android:layout_margin="8dp"
         >
         <TextView
+            android:id="@+id/tv_update_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="版本更新"
@@ -19,82 +20,91 @@
             />
     </RelativeLayout>
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/update_lin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
         >
-        <TextView
-            android:id="@+id/tv_update_old"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="当前版本:"
-            android:layout_centerVertical="true"
-            android:textSize="15sp"
-            />
-    </RelativeLayout>
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            >
+            <TextView
+                android:id="@+id/tv_update_old"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="当前版本:"
+                android:layout_centerVertical="true"
+                android:textSize="15sp"
+                />
+        </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        >
-        <TextView
-            android:id="@+id/tv_update_new"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="最新版本:"
-            android:layout_centerVertical="true"
-            android:textSize="15sp"
-            />
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        >
-        <TextView
-            android:id="@+id/tv_update_name"
-            android:layout_width="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            >
+            <TextView
+                android:id="@+id/tv_update_new"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="最新版本:"
+                android:layout_centerVertical="true"
+                android:textSize="15sp"
+                />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="应用名称:"
-            android:textSize="15sp"
-            android:layout_centerVertical="true"
-            />
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        >
-        <TextView
-            android:id="@+id/tv_update_size"
-            android:layout_width="wrap_content"
+            android:layout_margin="8dp"
+            >
+            <TextView
+                android:id="@+id/tv_update_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="应用名称:"
+                android:textSize="15sp"
+                android:layout_centerVertical="true"
+                />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="应用大小:"
-            android:layout_centerVertical="true"
-            android:textSize="15sp"
-            />
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            >
+            <TextView
+                android:id="@+id/tv_update_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="应用大小:"
+                android:layout_centerVertical="true"
+                android:textSize="15sp"
+                />
 
-    </RelativeLayout>
+        </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        >
-        <TextView
-            android:id="@+id/tv_update_des"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="更新说明:"
-            android:layout_centerVertical="true"
-            android:textSize="15sp"
-            />
-    </RelativeLayout>
+            android:layout_margin="8dp"
+            >
+            <TextView
+                android:id="@+id/tv_update_des"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="更新说明:"
+                android:layout_centerVertical="true"
+                android:textSize="15sp"
+                />
+        </RelativeLayout>
+    </LinearLayout>
+
+
 
 </LinearLayout>

@@ -32,6 +32,7 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.2.1'
     compile 'com.android.support:support-v4:23.2.1'
     compile 'com.android.support:design:23.2.1'
+    compile 'com.squareup.okhttp3:okhttp:3.0.1'
     compile 'com.zhy:mpermission-api:1.0.0'
     apt 'com.zhy:mpermission-compiler:1.0.0'
     compile files('libs/mpandroidchartlibrary-2-1-6.jar')

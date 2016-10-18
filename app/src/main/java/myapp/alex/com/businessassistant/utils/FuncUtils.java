@@ -1,6 +1,10 @@
 package myapp.alex.com.businessassistant.utils;
 
 
+import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -99,6 +103,22 @@ public class FuncUtils {
         long between_days=(time2-time1)/(1000*3600*24);
 
         return Integer.parseInt(String.valueOf(between_days));
+    }
+
+    /**
+     2  * 获取版本号
+     3  * @return 当前应用的版本号
+     4  */
+    public static String getVersion(Context context) {
+        try {
+            PackageManager manager = context.getPackageManager();
+            PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
+            String version = info.versionName;
+            return version;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "1.0";
+        }
     }
 
 

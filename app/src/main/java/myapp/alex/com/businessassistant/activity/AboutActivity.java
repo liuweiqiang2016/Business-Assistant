@@ -13,6 +13,7 @@ import android.widget.TextView;
 import myapp.alex.com.businessassistant.R;
 import myapp.alex.com.businessassistant.adapter.ManualAdapter;
 import myapp.alex.com.businessassistant.adapter.ThankAdapter;
+import myapp.alex.com.businessassistant.utils.FuncUtils;
 
 public class AboutActivity extends AppCompatActivity {
 
@@ -44,7 +45,7 @@ public class AboutActivity extends AppCompatActivity {
         titles=getResources().getStringArray(R.array.about_dev);
         contents=getResources().getStringArray(R.array.about_dev_info);
         links=getResources().getStringArray(R.array.about_thank_links);
-        version=getVersion();
+        version= FuncUtils.getVersion(this);
     }
     private void initView() {
         title= (TextView) customView.findViewById(R.id.action_bar_tv);
@@ -63,21 +64,6 @@ public class AboutActivity extends AppCompatActivity {
         rv_thk.setAdapter(thankAdapter);
     }
 
-    /**
-     2  * 获取版本号
-     3  * @return 当前应用的版本号
-     4  */
-    public String getVersion() {
-        try {
-            PackageManager manager = this.getPackageManager();
-            PackageInfo info = manager.getPackageInfo(this.getPackageName(), 0);
-            String version = info.versionName;
-            return version;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "1.0";
-        }
-    }
 
     //返回主界面
     @Override

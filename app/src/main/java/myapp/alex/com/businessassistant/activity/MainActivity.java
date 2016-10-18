@@ -21,14 +21,16 @@ import java.util.List;
 
 import myapp.alex.com.businessassistant.R;
 import myapp.alex.com.businessassistant.adapter.HomeAdapter;
+import myapp.alex.com.businessassistant.fragment.SoftUpdateFragment;
 import myapp.alex.com.businessassistant.model.CostTypeModel;
 import myapp.alex.com.businessassistant.model.OrderModel;
 import myapp.alex.com.businessassistant.model.ServiceModel;
+import myapp.alex.com.businessassistant.model.VersionInfoModel;
 import myapp.alex.com.businessassistant.utils.FuncUtils;
 import myapp.alex.com.businessassistant.utils.MyDbUtils;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SoftUpdateFragment.SoftUpdateListener{
 
     private RecyclerView mRecyclerView;
     private HomeAdapter mAdapter;
@@ -36,8 +38,6 @@ public class MainActivity extends AppCompatActivity {
     private int[] items_img;
     //数据库
     private DbUtils db;
-
-//    MaqueeTextView tv_orderinfo,tv_scheduleinfo;
 
     private static final int REQUECT_CODE_SDCARD = 1;
     @Override
@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
         initView();
         //绑定监听
         initEvent();
-
     }
 
     private void initView() {
@@ -61,8 +60,6 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(3,
                 StaggeredGridLayoutManager.VERTICAL));
         mRecyclerView.setAdapter(mAdapter);
-//        tv_orderinfo= (MaqueeTextView) findViewById(R.id.tv_orderinfo);
-//        tv_scheduleinfo= (MaqueeTextView) findViewById(R.id.tv_scheduleinfo);
     }
 
     @Override
@@ -244,6 +241,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 9:
                         //版本更新
+                        VersionInfoModel model=new VersionInfoModel();
+                        SoftUpdateFragment fragment=SoftUpdateFragment.newInstance(model);
+                        fragment.show(getFragmentManager(),"tag");
                         break;
                     case 10:
                         //工作笔记
@@ -288,38 +288,17 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
-//        Toast.makeText(this,"",Toast.LENGTH_SHORT).show();
-//        Intent mHomeIntent = new Intent(Intent.ACTION_MAIN);
-//        mHomeIntent.addCategory(Intent.CATEGORY_HOME);
-//        mHomeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-//                | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-//        startActivity(mHomeIntent);
         finish();
         System.exit(0);
         android.os.Process.killProcess(android.os.Process.myPid());
 
     }
 
+    @Override
+    public void onSoftUpdate(String link) {
 
-//    //切换fragment
-//    void setFragment(Fragment fragment){
-//
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager
-//                .beginTransaction();
-//        try {
-//            fragmentTransaction.replace(R.id.id_contanier, fragment,
-//                    fragment.getClass().getName()).commitAllowingStateLoss();
-//            //提交更改
-////            fragmentTransaction.commit();
-//
-//        } catch (Exception e) {
-//            // TODO: handle exception
-//            System.out.println(e.getCause());
-//        }
-//
-//    };
+    }
+
 
 }
 

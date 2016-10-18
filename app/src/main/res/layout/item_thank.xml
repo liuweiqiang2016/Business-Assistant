@@ -8,18 +8,7 @@
     android:layout_marginTop="3dp"
     >
     <TextView
-        android:id="@+id/manual_item_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="17sp"
-        android:text="暖爱耐受的乃是当年年底时您说呢·"
-        android:textColor="@android:color/black"
-        android:layout_marginBottom="3dp"
-
-        />
-
-    <TextView
-        android:id="@+id/manual_item_content"
+        android:id="@+id/thank_item_link"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="14sp"

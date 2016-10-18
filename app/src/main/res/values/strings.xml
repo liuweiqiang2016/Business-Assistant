@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Business Assistant</string>
+    <string name="app_name">小店管家</string>
     <string-array name="items_txt">
         <item>创建新订单</item>
         <item>未完成订单</item>
@@ -95,6 +95,7 @@
     </string-array>
 
     <string-array name="manual_titles">
+        <item>0、前言</item>
         <item>1、创建新订单</item>
         <item>2、未完成订单</item>
         <item>3、订单查询</item>
@@ -113,6 +114,7 @@
     </string-array>
 
     <string-array name="manual_contents">
+        <item>本系统预设的数据是以一家洗衣店为例，您可以通过项目编辑功能，执行增加、删除、编辑操作，修改成您所需的业务，具体操作见下文所述。</item>
         <item>进入创建新订单界面后，点击右上方的“+”，可添加对应的服务,伴随服务的添加，订单的总金额也随之智能增加。填写完毕订单信息后，点击最下方的"保存"按钮，系统将保存创建的新订单。</item>
         <item>进入未完成订单界面后，若系统内不存在未完成订单，表示您无需处理任何订单。若存在未完成订单，将以列表形式展现，点击某条订单，将会进入到该条订单详情界面，点击最下方“已完成”按钮，意味着你处理完毕该订单。</item>
         <item>进入订单查询界面后，您可通过设置查询条件，查询对应的订单信息。若您未设置查询条件，则查询所有的订单信息。点击某条订单，将会进入该条订单的详情界面。</item>
@@ -131,6 +133,26 @@
 
     </string-array>
 
+    <string-array name="about_dev">
+        <item>开发者</item>
+        <item>资料</item>
+        <item>邮箱</item>
+    </string-array>
+
+    <string-array name="about_dev_info">
+        <item>liuweiqiang</item>
+        <item>https://github.com/liuweiqiang2016</item>
+        <item>liu.weiqiang@foxmail.com</item>
+    </string-array>
+    <string-array name="about_thank_links">
+        <item>https://github.com/wyouflf/xUtils</item>
+        <item>https://github.com/square/okhttp</item>
+        <item>https://github.com/PhilJay/MPAndroidChart</item>
+        <item>https://github.com/hongyangAndroid/MPermissions</item>
+        <item>https://github.com/konifar/android-material-design-icon-generator-plugin
+</item>
+    </string-array>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -141,4 +163,5 @@
     <string name="tv_orderinfo_null">暂无未完成订单需要处理</string>
     <string name="tv_scheduleinfo_null">暂无日程安排</string>
     <string name="title_activity_detailorder">订单详情</string>
+    <string name="app_about_content">本app旨在帮助用户更好的处理订单、成本、客户三者之间的相互关联，以数据作为输入项，用图表的形式把结果直观的展示给用户。在您使用的过程中，如遇到任何问题，请发邮件给我，非常感谢您的使用!</string>
 </resources>

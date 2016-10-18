@@ -262,6 +262,8 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 13:
                         //关于
+                        intent.setClass(MainActivity.this,AboutActivity.class);
+                        startActivity(intent);
                         break;
                     case 14:
                         //退出

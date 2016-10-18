@@ -100,7 +100,7 @@ public class DataSettingFragment extends DialogFragment {
                 // 若EditText未设定日期，此时显示当前系统日期，否则显示EditText设定的日期
                 if (et_start.getText().toString().equals("")) {
 
-                    t1 = FuncUtils.getTime();
+                    t1 = FuncUtils.getDate();
                 } else {
                     t1 = et_start.getText().toString();
                 }
@@ -118,7 +118,7 @@ public class DataSettingFragment extends DialogFragment {
                 // 若EditText未设定日期，此时显示当前系统日期，否则显示EditText设定的日期
                 if (et_end.getText().toString().equals("")) {
 
-                    t2 = FuncUtils.getTime();
+                    t2 = FuncUtils.getDate();
                 } else {
                     t2 = et_end.getText().toString();
                 }

@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.zeone.framework.db.sqlite.DbUtils;
 import com.zeone.framework.db.sqlite.Selector;
@@ -113,7 +112,7 @@ public class OrderDetailActivity extends AppCompatActivity {
         orderModel.setState("1");
         orderModel.setDtime(FuncUtils.getTime());
         db.update(orderModel);
-        Toast.makeText(this,"订单状态更新为:已完成!",Toast.LENGTH_SHORT).show();
+        FuncUtils.showToast(this,"订单状态更新为:已完成!");
         onBackPressed();
 
     }

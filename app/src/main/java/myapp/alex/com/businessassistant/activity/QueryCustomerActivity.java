@@ -7,25 +7,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.zeone.framework.db.sqlite.DbUtils;
 import com.zeone.framework.db.sqlite.Selector;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import myapp.alex.com.businessassistant.R;
-import myapp.alex.com.businessassistant.adapter.QueryCostAdapter;
 import myapp.alex.com.businessassistant.adapter.QueryCustomerAdapter;
-import myapp.alex.com.businessassistant.adapter.QueryOrderAdapter;
 import myapp.alex.com.businessassistant.fragment.CustomerSettingFragment;
-import myapp.alex.com.businessassistant.fragment.QuerySettingFragment;
 import myapp.alex.com.businessassistant.model.CustomerModel;
-import myapp.alex.com.businessassistant.model.OrderModel;
 import myapp.alex.com.businessassistant.utils.DividerItemDecoration;
 import myapp.alex.com.businessassistant.utils.FuncUtils;
 import myapp.alex.com.businessassistant.utils.MyDbUtils;
@@ -124,7 +116,7 @@ public class QueryCustomerActivity extends AppCompatActivity implements Customer
     private void ShowView() {
         //更新界面
         if(list==null||list.size()<1){
-            Toast.makeText(this, "没有满足所选查询条件下的客户信息，请重新设置查询条件!", Toast.LENGTH_SHORT).show();
+            FuncUtils.showToast(this, "没有满足所选查询条件下的客户信息，请重新设置查询条件!");
             if (list==null){
                 list=new ArrayList<>();
             }

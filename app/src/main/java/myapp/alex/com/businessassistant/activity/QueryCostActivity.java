@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.zeone.framework.db.sqlite.DbUtils;
 import com.zeone.framework.db.sqlite.Selector;
@@ -89,7 +88,7 @@ public class QueryCostActivity extends AppCompatActivity implements CostSettingF
     private void ShowView() {
 
         if(list==null||list.size()<1){
-            Toast.makeText(this, "没有满足所选查询条件下的开销信息，请重新设置查询条件!", Toast.LENGTH_SHORT).show();
+            FuncUtils.showToast(this, "没有满足所选查询条件下的开销信息，请重新设置查询条件!");
             if (list==null){
                 list=new ArrayList<>();
             }
@@ -157,7 +156,7 @@ public class QueryCostActivity extends AppCompatActivity implements CostSettingF
             }
 
         }else{
-            Toast.makeText(this, "开始时间不能大于结束时间，请重新选择!", Toast.LENGTH_SHORT).show();
+            FuncUtils.showToast(this, "开始时间不能大于结束时间，请重新选择!");
         }
 
     }

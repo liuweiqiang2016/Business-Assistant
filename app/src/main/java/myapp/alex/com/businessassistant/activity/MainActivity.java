@@ -12,7 +12,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.zeone.framework.db.sqlite.DbUtils;
 import com.zeone.framework.db.sqlite.Selector;
@@ -191,7 +190,7 @@ public class MainActivity extends AppCompatActivity implements SoftUpdateFragmen
     @ShowRequestPermissionRationale(REQUECT_CODE_SDCARD)
     public void whyNeedSdCard()
     {
-        Toast.makeText(this, "APP存储数据到手机内存中，需要手机内存读写权限!", Toast.LENGTH_SHORT).show();
+        FuncUtils.showToast(this, "APP存储数据到手机内存中，需要手机内存读写权限!");
         MPermissions.requestPermissions(MainActivity.this, REQUECT_CODE_SDCARD, Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
     }
@@ -203,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements SoftUpdateFragmen
     @PermissionDenied(REQUECT_CODE_SDCARD)
     public void requestSdcardFailed()
     {
-        Toast.makeText(this, "APP存储数据到手机内存中，需要手机内存读写权限!", Toast.LENGTH_SHORT).show();
+        FuncUtils.showToast(this, "APP存储数据到手机内存中，需要手机内存读写权限!");
     }
 
     private void initEvent() {
@@ -258,10 +257,12 @@ public class MainActivity extends AppCompatActivity implements SoftUpdateFragmen
                         startActivity(intent);
                         break;
                     case 9:
+                        //判断网络是否连接
+                        if(!FuncUtils.isNetworkAvailable(MainActivity.this)){
+                            FuncUtils.showToast(MainActivity.this,"版本检测需要联网，请联网后再试!");
+                            return;
+                        }
                         //版本更新
-//                        VersionInfoModel model=new VersionInfoModel();
-//                        SoftUpdateFragment fragment=SoftUpdateFragment.newInstance(model);
-//                        fragment.show(getFragmentManager(),"tag");
                         fragment=SoftUpdateFragment.newInstance(null);
                         fragment.show(getFragmentManager(),"tag");
                         new AsyncTask<Void,Void,Void>(){
@@ -269,7 +270,7 @@ public class MainActivity extends AppCompatActivity implements SoftUpdateFragmen
                             protected Void doInBackground(Void... params) {
 
                                 //下载xml文件(版本升级信息)
-                                getFile(FuncUtils.APP_UPDATE_URL,FuncUtils.APP_DIR);
+                                getFile(FuncUtils.APP_UPDATE_URL,FuncUtils.APP_DIR,true);
 
                                 return null;
                             }
@@ -335,12 +336,16 @@ public class MainActivity extends AppCompatActivity implements SoftUpdateFragmen
                             fragment=SoftUpdateFragment.newInstance(versionInfoModel);
                             fragment.show(getFragmentManager(),"tag");
                         }else{
-                            Toast.makeText(MainActivity.this,"当前版本已是最新版本，无需更新!",Toast.LENGTH_SHORT).show();
+                            FuncUtils.showToast(MainActivity.this,"当前版本已是最新版本，无需更新!");
                         }
 
                     }
                 }
 
+            }
+            if (msg.what==2){
+                fragment.dismiss();
+                FuncUtils.showToast(MainActivity.this,"网络异常，版本检测失败，请稍后再试!");
             }
         }
     };
@@ -350,9 +355,17 @@ public class MainActivity extends AppCompatActivity implements SoftUpdateFragmen
      *
      * @param url  地址
      * @param path 下载的文件地址
+     * @param check 是否为版本检测(下载xml文件)
      */
-    private void getFile(final String url, final String path) {
-        final String fileName = url.substring(url.lastIndexOf("/") + 1);
+    private void getFile(final String url, final String path,final boolean check) {
+        final String fileName;
+        if (check){
+            //若下载xml文件
+            fileName= url.substring(url.lastIndexOf("/") + 1);
+        }else{
+            //若下载apk文件
+            fileName=FuncUtils.APP_DOWNFILE_NAME;
+        }
         OkHttpClient client = new OkHttpClient();
         client = OkHttpHelper.getOkClient(client, new UIProgressResponseListener() {
             @Override
@@ -360,7 +373,8 @@ public class MainActivity extends AppCompatActivity implements SoftUpdateFragmen
                 float progress = currentBytes * 100f / allBytes;
                 Log.i("MAIN", "onUIProgressRequest: 总长度：" + allBytes + " 当前下载的长度：" + currentBytes + "是否下载完成：" + done + "下载进度：" + progress);
 
-                if (done){
+                if (done&&check){
+                    //下载版本更新信息xml文件成功
                     mHandler.sendEmptyMessage(1);
                 }
 
@@ -371,6 +385,10 @@ public class MainActivity extends AppCompatActivity implements SoftUpdateFragmen
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+                if (check){
+                    //下载版本更新信息xml文件失败
+                    mHandler.sendEmptyMessage(2);
+                }
 
             }
 
@@ -408,7 +426,18 @@ public class MainActivity extends AppCompatActivity implements SoftUpdateFragmen
     }
 
     @Override
-    public void onSoftUpdate(String link) {
+    public void onSoftUpdate(final String link) {
+
+        new AsyncTask<Void,Void,Void>(){
+            @Override
+            protected Void doInBackground(Void... params) {
+
+                //下载apk文件(版本升级信息)
+                getFile(link,FuncUtils.APP_DIR,false);
+
+                return null;
+            }
+        }.execute();
 
     }
 

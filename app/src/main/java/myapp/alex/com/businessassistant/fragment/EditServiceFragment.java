@@ -11,11 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import java.lang.reflect.Field;
 
 import myapp.alex.com.businessassistant.R;
+import myapp.alex.com.businessassistant.utils.FuncUtils;
 import myapp.alex.com.businessassistant.utils.MaqueeTextView;
 
 /**
@@ -96,7 +96,7 @@ public class EditServiceFragment extends DialogFragment {
                             {
                                 //单价不能为空
                                 if (et_editorder_price.getText().toString().trim().equals("")){
-                                    Toast.makeText(getActivity(),"单价不能为空！",Toast.LENGTH_SHORT).show();
+                                    FuncUtils.showToast(getActivity(),"单价不能为空！");
 
                                     try
                                     {

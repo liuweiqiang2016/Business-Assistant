@@ -7,8 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.zeone.framework.db.sqlite.DbUtils;
 import com.zeone.framework.db.sqlite.Selector;
 
@@ -232,7 +230,7 @@ public class QueryOrderActivity extends AppCompatActivity implements QuerySettin
             //展示查询后的订单列表
             showRecyclerView(list);
         } else {
-            Toast.makeText(this, "开始时间不能大于结束时间，请重新选择!", Toast.LENGTH_SHORT).show();
+            FuncUtils.showToast(this, "开始时间不能大于结束时间，请重新选择!");
         }
 
     }
@@ -240,7 +238,7 @@ public class QueryOrderActivity extends AppCompatActivity implements QuerySettin
     //展示查询后的订单列表
     private void showRecyclerView(List<OrderModel> list) {
         if (list == null || list.size() < 1) {
-            Toast.makeText(this, "没有满足所选查询条件下的订单信息，请重新设置查询条件!", Toast.LENGTH_SHORT).show();
+            FuncUtils.showToast(this, "没有满足所选查询条件下的订单信息，请重新设置查询条件!");
             if (list==null){
                 list=new ArrayList<>();
             }

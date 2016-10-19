@@ -102,8 +102,8 @@ public class SoftUpdateFragment extends DialogFragment {
     //赋值数据
     void initData(){
         title.setText("版本更新");
-        old_code.setText("当前版本:V"+versionInfoModel.getCode_old());
-        new_code.setText("最新版本:V"+versionInfoModel.getCode());
+        old_code.setText("当前版本:"+versionInfoModel.getCode_old());
+        new_code.setText("最新版本:"+versionInfoModel.getCode());
         name.setText("应用名称:"+versionInfoModel.getName());
         size.setText("应用大小:"+versionInfoModel.getSize());
         des.setText("更新说明:"+versionInfoModel.getDes());

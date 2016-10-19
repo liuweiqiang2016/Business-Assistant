@@ -12,16 +12,12 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.lang.reflect.Field;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 import myapp.alex.com.businessassistant.R;
-import myapp.alex.com.businessassistant.utils.DateTimePickDialogUtil;
+import myapp.alex.com.businessassistant.utils.FuncUtils;
 
 /**
  * Created by liuweiqiang on 2016/9/8.
@@ -92,7 +88,7 @@ public class AddServiceFragment extends DialogFragment {
                             public void onClick(DialogInterface dialog, int id)
                             {
                                 if (et_addservice_name.getText().toString().trim().equals("")){
-                                    Toast.makeText(getActivity(),"服务名称不能为空！",Toast.LENGTH_SHORT).show();
+                                    FuncUtils.showToast(getActivity(),"服务名称不能为空！");
                                     try
                                     {
                                         Field field = dialog.getClass()
@@ -111,7 +107,7 @@ public class AddServiceFragment extends DialogFragment {
                                 }else{
 
                                     if (mNames.contains(et_addservice_name.getText().toString().trim())){
-                                        Toast.makeText(getActivity(),"服务名称已存在！",Toast.LENGTH_SHORT).show();
+                                        FuncUtils.showToast(getActivity(),"服务名称已存在！");
                                         try
                                         {
                                             Field field = dialog.getClass()
@@ -128,7 +124,7 @@ public class AddServiceFragment extends DialogFragment {
                                         }
                                     }else {
                                         if (et_addservice_price.getText().toString().trim().equals("")){
-                                            Toast.makeText(getActivity(),"项目单价不能为空！",Toast.LENGTH_SHORT).show();
+                                            FuncUtils.showToast(getActivity(),"项目单价不能为空！");
                                             try
                                             {
                                                 Field field = dialog.getClass()

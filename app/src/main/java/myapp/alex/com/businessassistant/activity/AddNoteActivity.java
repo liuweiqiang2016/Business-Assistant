@@ -1,18 +1,13 @@
 package myapp.alex.com.businessassistant.activity;
 
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.zeone.framework.db.sqlite.DbUtils;
-
 import myapp.alex.com.businessassistant.R;
-import myapp.alex.com.businessassistant.model.CustomerModel;
 import myapp.alex.com.businessassistant.model.NoteModel;
 import myapp.alex.com.businessassistant.utils.FuncUtils;
 import myapp.alex.com.businessassistant.utils.MyDbUtils;
@@ -58,11 +53,11 @@ public class AddNoteActivity extends AppCompatActivity {
 
     public void OnAddNote(View view) {
         if(et_subject.getText().toString().trim().equals("")){
-            Toast.makeText(this,"笔记主题必填且不可为空格!",Toast.LENGTH_SHORT).show();
+            FuncUtils.showToast(this,"笔记主题必填且不可为空格!");
             return;
         }
         if(et_body.getText().toString().trim().equals("")){
-            Toast.makeText(this,"笔记内容必填且不可为空格!!",Toast.LENGTH_SHORT).show();
+            FuncUtils.showToast(this,"笔记内容必填且不可为空格!");
             return;
         }
 //        CustomerModel model=new CustomerModel();
@@ -79,7 +74,7 @@ public class AddNoteActivity extends AppCompatActivity {
         model.setBody(et_body.getText().toString());
         model.setTime(time);
         db.save(model);
-        Toast.makeText(this,"工作笔记保存完成!",Toast.LENGTH_SHORT).show();
+        FuncUtils.showToast(this,"工作笔记保存完成!");
         onBackPressed();
     }
 

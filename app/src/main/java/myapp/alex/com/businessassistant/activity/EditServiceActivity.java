@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.zeone.framework.db.sqlite.DbUtils;
 import com.zeone.framework.db.sqlite.Selector;
@@ -27,6 +26,7 @@ import myapp.alex.com.businessassistant.fragment.DeleteServiceFragment;
 import myapp.alex.com.businessassistant.fragment.EditServiceFragment;
 import myapp.alex.com.businessassistant.model.ServiceModel;
 import myapp.alex.com.businessassistant.utils.DividerItemDecoration;
+import myapp.alex.com.businessassistant.utils.FuncUtils;
 import myapp.alex.com.businessassistant.utils.MyDbUtils;
 
 public class EditServiceActivity extends AppCompatActivity implements EditServiceFragment.EditOrderListener,AddServiceFragment.AddServiceListener,DeleteServiceFragment.DeleteServiceListener{
@@ -147,7 +147,7 @@ public class EditServiceActivity extends AppCompatActivity implements EditServic
                 db.update(model);
                 //更新列表
                 adapter.notifyItemChanged(position,model);
-                Toast.makeText(this,"修改服务项成功!",Toast.LENGTH_SHORT).show();
+                FuncUtils.showToast(this,"修改服务项成功!");
 
         }catch (Exception e){
 
@@ -174,7 +174,7 @@ public class EditServiceActivity extends AppCompatActivity implements EditServic
             //order_list=db.findAll(Selector.from(ServiceModel.class).where("C_Show","=","1"));
 //            adapter.addData(0,model);
             adapter.addData(model);
-            Toast.makeText(this,"新增服务项成功!",Toast.LENGTH_SHORT).show();
+            FuncUtils.showToast(this,"新增服务项成功!");
         }catch (Exception e){
 
         };
@@ -222,7 +222,7 @@ public class EditServiceActivity extends AppCompatActivity implements EditServic
                             //删除该项数据
                             // order_list.remove(order_position);
                             names.remove(position);
-                            Toast.makeText(EditServiceActivity.this,"删除服务项成功!",Toast.LENGTH_SHORT).show();
+                            FuncUtils.showToast(EditServiceActivity.this,"删除服务项成功!");
 
                         }catch (Exception e){
 

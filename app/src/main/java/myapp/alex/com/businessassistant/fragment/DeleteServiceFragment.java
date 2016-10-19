@@ -10,11 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.EditText;
-import android.widget.Toast;
-
-import java.lang.reflect.Field;
-
 import myapp.alex.com.businessassistant.R;
 import myapp.alex.com.businessassistant.utils.MaqueeTextView;
 

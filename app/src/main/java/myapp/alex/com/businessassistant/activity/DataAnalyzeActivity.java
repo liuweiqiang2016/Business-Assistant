@@ -7,7 +7,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
@@ -106,7 +105,7 @@ public class DataAnalyzeActivity extends AppCompatActivity implements DataSettin
     //处理查询
     public void OnDataQuery(View view) {
         if (start.equals("")||end.equals("")){
-            Toast.makeText(this,"请先设置查询条件!",Toast.LENGTH_SHORT).show();
+            FuncUtils.showToast(this,"请先设置查询条件!");
             return;
         }
         try{
@@ -115,7 +114,7 @@ public class DataAnalyzeActivity extends AppCompatActivity implements DataSettin
 //                showViewByPosition(position);
                 showView();
             }else{
-                Toast.makeText(this, "开始时间需早于结束时间，请重新选择!", Toast.LENGTH_SHORT).show();
+                FuncUtils.showToast(this, "开始时间需早于结束时间，请重新选择!");
             }
         }catch (Exception e){
 
@@ -309,7 +308,7 @@ public class DataAnalyzeActivity extends AppCompatActivity implements DataSettin
                     //查询数据
                     costModels=db.findAll(Selector.from(CostModel.class).where("C_Time",">",start).and("C_Time","<",end));
                     if (costModels==null||costModels.size()<1){
-                        Toast.makeText(this, start+"至"+end+"期间内，无任何开支入账!", Toast.LENGTH_SHORT).show();
+                        FuncUtils.showToast(this, start+"至"+end+"期间内，无任何开支入账!");
                         return;
                     }
                     //获得成本类型

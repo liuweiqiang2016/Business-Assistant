@@ -4,8 +4,11 @@ package myapp.alex.com.businessassistant.utils;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Environment;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,16 +23,11 @@ import java.util.Date;
  * Created by liuweiqiang on 2016/9/21.
  */
 public class FuncUtils {
-//    //查询跳转的tag
-//    public static final String TAG_QUERY="queryTag";
-//    public static final int TAG_ORDER=0;//订单查询
-//    public static final String ID_COST="cost";//开销查询
-//    public static final int TAG_CUSTOMER=2;//客户查询
-//    public static final int TAG_NOTE=3;//笔记查询
 
     public static final String APP_DIR= Environment.getExternalStorageDirectory()+"/BusinessAssistant/";
     public static final String APP_UPDATE_URL= "https://raw.githubusercontent.com/liuweiqiang2016/Business-Assistant/master/app/versioninfo.xml";
 
+    public static final String APP_DOWNFILE_NAME ="BusinessAssistant.apk";
 
     // 获取当前时间
     public static String getTime() {
@@ -192,6 +190,40 @@ public class FuncUtils {
         {
             return false;
         }
+    }
+
+    /**
+     * 检测当的网络（WLAN、3G/2G）状态
+     * @param context Context
+     * @return true 表示网络可用
+     */
+    public static boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connectivity = (ConnectivityManager) context
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivity != null) {
+            NetworkInfo info = connectivity.getActiveNetworkInfo();
+            if (info != null && info.isConnected())
+            {
+                // 当前网络是连接的
+                if (info.getState() == NetworkInfo.State.CONNECTED)
+                {
+                    // 当前所连接的网络可用
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 弹出toast消息
+     * @param context  context
+     * @return string 展示的内容
+     */
+    public static void showToast(Context context,String string){
+
+        Toast.makeText(context,string,Toast.LENGTH_SHORT).show();
+
     }
 
 

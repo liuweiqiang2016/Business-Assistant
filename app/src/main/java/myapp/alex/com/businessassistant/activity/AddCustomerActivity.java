@@ -6,11 +6,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.zeone.framework.db.sqlite.DbUtils;
 import myapp.alex.com.businessassistant.R;
 import myapp.alex.com.businessassistant.model.CustomerModel;
+import myapp.alex.com.businessassistant.utils.FuncUtils;
 import myapp.alex.com.businessassistant.utils.MyDbUtils;
 
 public class AddCustomerActivity extends AppCompatActivity {
@@ -58,11 +57,11 @@ public class AddCustomerActivity extends AppCompatActivity {
 
     public void OnAddCustomer(View view) {
         if(et_name.getText().toString().trim().equals("")){
-            Toast.makeText(this,"客户名称必填且不可为空格!",Toast.LENGTH_SHORT).show();
+            FuncUtils.showToast(this,"客户名称必填且不可为空格!");
             return;
         }
         if(et_tel.getText().toString().equals("")){
-            Toast.makeText(this,"联系方式必填!",Toast.LENGTH_SHORT).show();
+            FuncUtils.showToast(this,"联系方式必填!");
             return;
         }
         CustomerModel model=new CustomerModel();
@@ -74,7 +73,7 @@ public class AddCustomerActivity extends AppCompatActivity {
         //用户添加为1
         model.setSource("1");
         db.save(model);
-        Toast.makeText(this,"客户信息保存完成!",Toast.LENGTH_SHORT).show();
+        FuncUtils.showToast(this,"客户信息保存完成!");
         onBackPressed();
     }
 

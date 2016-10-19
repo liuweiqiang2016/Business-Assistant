@@ -15,7 +15,6 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.zeone.framework.db.sqlite.DbUtils;
 import com.zeone.framework.db.sqlite.Selector;
@@ -26,6 +25,7 @@ import java.util.List;
 
 import myapp.alex.com.businessassistant.R;
 import myapp.alex.com.businessassistant.model.ServiceModel;
+import myapp.alex.com.businessassistant.utils.FuncUtils;
 import myapp.alex.com.businessassistant.utils.MyDbUtils;
 
 /**
@@ -77,7 +77,7 @@ public class CreateOrderFragment extends DialogFragment {
                             {
                                 String num=et_num.getText().toString();
                                 if (num.trim().equals("")){
-                                    Toast.makeText(getActivity(),"数量不能为空！",Toast.LENGTH_SHORT).show();
+                                    FuncUtils.showToast(getActivity(),"数量不能为空！");
 
                                     try
                                     {

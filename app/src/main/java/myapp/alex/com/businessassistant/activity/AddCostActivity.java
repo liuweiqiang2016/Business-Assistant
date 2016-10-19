@@ -8,8 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.zeone.framework.db.sqlite.DbUtils;
 import com.zeone.framework.db.sqlite.Selector;
 
@@ -99,16 +97,16 @@ public class AddCostActivity extends AppCompatActivity {
 
     public void OnAddCost(View view) {
         if(et_cost_time.getText().toString().equals("")){
-            Toast.makeText(this,"开销时间必填!",Toast.LENGTH_SHORT).show();
+            FuncUtils.showToast(this,"开销时间必填!");
             return;
         }
 
         if(et_cost_name.getText().toString().trim().equals("")){
-            Toast.makeText(this,"开销名称必填且不可为空格!",Toast.LENGTH_SHORT).show();
+            FuncUtils.showToast(this,"开销名称必填且不可为空格!");
             return;
         }
         if(et_cost_money.getText().toString().equals("")){
-            Toast.makeText(this,"开销金额必填!",Toast.LENGTH_SHORT).show();
+            FuncUtils.showToast(this,"开销金额必填!");
             return;
         }
         CostModel model=new CostModel();
@@ -119,7 +117,7 @@ public class AddCostActivity extends AppCompatActivity {
         model.setMoney(et_cost_money.getText().toString());
         model.setInfo(et_cost_info.getText().toString());
         db.save(model);
-        Toast.makeText(this,"开销保存完成!",Toast.LENGTH_SHORT).show();
+        FuncUtils.showToast(this,"开销保存完成!");
 
         onBackPressed();
     }

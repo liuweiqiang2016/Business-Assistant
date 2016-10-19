@@ -10,14 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.Toast;
-
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-
 import myapp.alex.com.businessassistant.R;
 import myapp.alex.com.businessassistant.utils.DateTimePickDialogUtil;
 import myapp.alex.com.businessassistant.utils.FuncUtils;
@@ -144,7 +138,7 @@ public class DataSettingFragment extends DialogFragment {
                                 String start= et_start.getText().toString();
                                 String end= et_end.getText().toString();
                                 if (start.equals("")){
-                                    Toast.makeText(getActivity(),"开始时间不能为空！",Toast.LENGTH_SHORT).show();
+                                    FuncUtils.showToast(getActivity(),"开始时间不能为空！");
                                     try
                                     {
                                         Field field = dialog.getClass()
@@ -161,7 +155,7 @@ public class DataSettingFragment extends DialogFragment {
                                     }
                                 }else {
                                     if (end.equals("")){
-                                        Toast.makeText(getActivity(),"结束时间不能为空！",Toast.LENGTH_SHORT).show();
+                                        FuncUtils.showToast(getActivity(),"结束时间不能为空！");
 
                                         try
                                         {

@@ -9,12 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.zeone.framework.db.sqlite.DbUtils;
-import com.zeone.framework.db.sqlite.Selector;
-import com.zeone.framework.db.sqlite.WhereBuilder;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,6 +26,7 @@ import myapp.alex.com.businessassistant.model.CustomerModel;
 import myapp.alex.com.businessassistant.model.OrderModel;
 import myapp.alex.com.businessassistant.model.OrderServiceModel;
 import myapp.alex.com.businessassistant.model.ServiceModel;
+import myapp.alex.com.businessassistant.utils.FuncUtils;
 import myapp.alex.com.businessassistant.utils.MyDbUtils;
 
 public class CreateOrderActivity extends AppCompatActivity implements CreateOrderFragment.CreateInputListener, CustomerAdapter.SaveEditListener {
@@ -179,18 +176,18 @@ public class CreateOrderActivity extends AppCompatActivity implements CreateOrde
     //保存订单
     public void OnSave(View view) {
         if (list == null || list.size() < 1) {
-            Toast.makeText(this, "订单不能为空，请创建订单后再保存!", Toast.LENGTH_SHORT).show();
+            FuncUtils.showToast(this, "订单不能为空，请创建订单后再保存!");
             return;
         } else {
             //position为0时，确定是第一项内容，即客户名称，必填
             //为null或为空白提示错误
             if (map.get(0) == null || map.get(0).trim().equals("")) {
-                Toast.makeText(this, "客户名称为必填项，且不可为空格!", Toast.LENGTH_SHORT).show();
+                FuncUtils.showToast(this, "客户名称为必填项，且不可为空格!");
                 return;
             } else {
                 //存储订单
                 saveOrder();
-                Toast.makeText(this, "订单已创建成功，请尽快处理！", Toast.LENGTH_SHORT).show();
+                FuncUtils.showToast(this, "订单已创建成功，请尽快处理！");
                 onBackPressed();
 //                //判断是否多次点击了保存按钮
 //                OrderModel orderModel = db.findFirst(Selector.from(OrderModel.class).where("C_OrderID", "=", millis+""));

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
       <version>  
-        <code>1.0.0.4</code>
+        <code>1.0.0.8</code>
         <name>小店管家</name>
         <size>1.87MB</size>
         <des>增加版本更新功能，修复若干轻微bug</des>
-        <link>www.baidu.com</link>   
+        <link>http://p.gdown.baidu.com/14c00dd3d35a46ff4487be85e5f84ed4c8b722c472cf11bb9ac278e68a42aae9ce40967d165dfccd90f4f5a18f3a6f2f82c17bbe48e32028826d4d6fb0d8014d210455ecee32ee36d8943e44660d81f0645c7d5d14e7d42f20a365234fa4b33ba66b0d406b110328db43a20032ee24d395ef77b3bbfd80f16acf99409ce611192fa9ace5be49ee29e3336688ba199c838b63ea57eb97b5b1ddbd3715486fde304cdc33d787f929b397aaea7f4459e1288e39944446a363e8c58f29b5df2eeb117eb1bf794d6fe04ba11904cb797af2cdba05ed115945739630232a49686be762118a39b600d6a3ef7c81e0c0caf03fd25f22570c39cc68a5c38bc3ff2691438a9ab2783ac7c3845cb8420f96f1a4d67c</link>
     </version> 
 </resources>

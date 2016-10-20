@@ -1,4 +1,4 @@
-package myapp.alex.com.businessassistant.utils;
+package myapp.alex.com.businessassistant.okhttp;
 
 
 import java.io.IOException;

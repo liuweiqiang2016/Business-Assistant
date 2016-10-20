@@ -1,4 +1,4 @@
-package myapp.alex.com.businessassistant.utils;
+package myapp.alex.com.businessassistant.okhttp;
 
 /**
  * 响应体进度回调接口，比如用于文件下载中

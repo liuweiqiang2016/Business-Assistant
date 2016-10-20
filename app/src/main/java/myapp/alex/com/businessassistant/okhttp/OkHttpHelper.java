@@ -1,10 +1,7 @@
-package myapp.alex.com.businessassistant.utils;
+package myapp.alex.com.businessassistant.okhttp;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.RecursiveTask;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
@@ -14,7 +11,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import okhttp3.internal.Util;
 
 /**
  * Created by yyw on 2016/1/20.

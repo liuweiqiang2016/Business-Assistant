@@ -1,4 +1,4 @@
-package myapp.alex.com.businessassistant.utils;
+package myapp.alex.com.businessassistant.okhttp;
 
 /**
  * 请求体响应回调，用到上传

@@ -2,10 +2,13 @@ package myapp.alex.com.businessassistant.utils;
 
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
@@ -26,8 +29,8 @@ public class FuncUtils {
 
     public static final String APP_DIR= Environment.getExternalStorageDirectory()+"/BusinessAssistant/";
     public static final String APP_UPDATE_URL= "https://raw.githubusercontent.com/liuweiqiang2016/Business-Assistant/master/app/versioninfo.xml";
-
     public static final String APP_DOWNFILE_NAME ="BusinessAssistant.apk";
+    public static final String APP_XML_NAME ="versioninfo.xml";
 
     // 获取当前时间
     public static String getTime() {
@@ -225,6 +228,88 @@ public class FuncUtils {
         Toast.makeText(context,string,Toast.LENGTH_SHORT).show();
 
     }
+
+    /**
+     * 安装APK文件
+     */
+    public static void installApk(Context context) {
+        File apkfile = new File(APP_DIR,APP_DOWNFILE_NAME);
+        if (!apkfile.exists()) {
+            return;
+        }
+        // 通过Intent安装APK文件
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setDataAndType(Uri.parse("file://" + apkfile.toString()), "application/vnd.android.package-archive");
+        context.startActivity(intent);
+    }
+
+    /**
+     * 检查版本时间是否超过一小时
+     *
+     * @param time 版本数据时间
+     * @return true 表示超过一小时
+     */
+    public static boolean checkUpdateTime(String time) {
+        try {
+            long cur=System.currentTimeMillis();
+            long value=1*60*60*1000;//一小时毫秒数
+            if(cur-Long.parseLong(time)>=value){
+                return true;
+            }else{
+                return false;
+            }
+        }catch (Exception e){
+
+        }
+        return false;
+    }
+
+    /**
+     * 检查文件是否存在
+     *
+     * @param fileName 文件名称
+     * @return true 表示文件存在
+     */
+    public static boolean checkFileState(String fileName) {
+
+        File file = new File(APP_DIR,fileName);
+        if (file.exists()) {
+            return true;
+        }else {
+            return false;
+        }
+    }
+    /**
+     * 返回apk文件版本号
+     *
+     * @param context 文件名称
+     * @return version apk文件版本号
+     */
+    public static String apkCode(Context context){
+
+        String archiveFilePath=APP_DIR+APP_DOWNFILE_NAME;//安装包路径
+//      String archiveFilePath="sdcard/DangDang.apk";//安装包路径
+        String version="";
+        PackageManager pm = context.getPackageManager();
+        PackageInfo info = pm.getPackageArchiveInfo(archiveFilePath, PackageManager.GET_ACTIVITIES);
+        if(info != null){
+            version=info.versionName;       //得到版本信息
+//            ApplicationInfo appInfo = info.applicationInfo;
+//            String appName = pm.getApplicationLabel(appInfo).toString();
+//            String packageName = appInfo.packageName;  //得到安装包名称
+//             version=info.versionName;       //得到版本信息
+//            Toast.makeText(TestActivity.this, , Toast.LENGTH_LONG).show();
+//            Drawable icon = pm.getApplicationIcon(appInfo);//得到图标信息
+//            TextView tv = (TextView)findViewById(R.id.tv);
+//            tv.setText("appName:"+appName+"---packageName:"+packageName);
+//            //显示图标
+//            ImageView tu=(ImageView)findViewById(R.id.imageView1);
+//            tu.setBackgroundDrawable(icon);
+        }
+        return version;
+    }
+
 
 
 }

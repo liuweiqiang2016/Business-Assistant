@@ -8,4 +8,11 @@
     <color name="color_infotxt_null">#323232</color>
     <color name="color_infotxt_has">#ffff0000</color>
     <color name="color_bg">#F2F2F2</color>
+
+
+    <color name="red">#FFC93437</color>
+    <color name="blue">#FF375BF1</color>
+    <color name="yellow">#FFF7D23E</color>
+    <color name="green">#FF34A350</color>
+
 </resources>

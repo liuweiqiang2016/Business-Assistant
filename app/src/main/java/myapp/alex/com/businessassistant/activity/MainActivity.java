@@ -25,6 +25,7 @@ import java.util.List;
 
 import myapp.alex.com.businessassistant.R;
 import myapp.alex.com.businessassistant.adapter.HomeAdapter;
+import myapp.alex.com.businessassistant.fragment.CheckVersionFragment;
 import myapp.alex.com.businessassistant.fragment.FileProgressFragment;
 import myapp.alex.com.businessassistant.fragment.SoftUpdateFragment;
 import myapp.alex.com.businessassistant.model.CostTypeModel;
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements SoftUpdateFragmen
     private VersionInfoModel versionInfoModel;
     private SoftUpdateFragment fragment;
     private FileProgressFragment progressFragment;
+    CheckVersionFragment checkFragment;
 
     //判断是否在下载apk文件
     private boolean isDowning=false;
@@ -145,7 +147,8 @@ public class MainActivity extends AppCompatActivity implements SoftUpdateFragmen
                 db.save(castModel);
             }
         }
-
+        //软件打开10s后，检测版本 牺牲用户体验（去除）且会崩溃
+//        mHandler.sendEmptyMessageDelayed(6,10*1000);
     }
 
     //查找未完成订单信息
@@ -256,51 +259,8 @@ public class MainActivity extends AppCompatActivity implements SoftUpdateFragmen
                         startActivity(intent);
                         break;
                     case 9:
-                        //判断网络是否连接
-                        if (!FuncUtils.isNetworkAvailable(MainActivity.this)) {
-                            FuncUtils.showToast(MainActivity.this, "版本检测需要联网，请联网后再试!");
-                            return;
-                        }
-                        //版本更新 检查更新规定为1小时 1小时之内不下载新的更新信息
-                        fragment = SoftUpdateFragment.newInstance(null);
-                        fragment.show(getFragmentManager(), "tag");
-                        List<VersionModel> modelList;
-                        modelList = db.findAll(Selector.from(VersionModel.class));
-
-                        if (modelList==null||modelList.size()<1||!FuncUtils.checkFileState(FuncUtils.APP_XML_NAME)) {
-                            //不存在版本数据、不存在xml文件，必定下载
-                            new AsyncTask<Void, Void, Void>() {
-                                @Override
-                                protected Void doInBackground(Void... params) {
-                                    //下载xml文件(版本升级信息)
-                                    DownFileUtil util=new DownFileUtil(mHandler);
-                                    util.getFile(FuncUtils.APP_UPDATE_URL, FuncUtils.APP_DIR, true);
-
-                                    return null;
-                                }
-                            }.execute();
-                        }else{
-                            //存在版本数据，比较当前时间与版本数据时间，是否间隔1小时
-                            if (FuncUtils.checkUpdateTime(modelList.get(0).getTime())){
-                                //大于一小时，下载xml文件
-                                new AsyncTask<Void, Void, Void>() {
-                                    @Override
-                                    protected Void doInBackground(Void... params) {
-                                        //下载xml文件(版本升级信息)
-                                        DownFileUtil util=new DownFileUtil(mHandler);
-                                        util.getFile(FuncUtils.APP_UPDATE_URL, FuncUtils.APP_DIR, true);
-
-                                        return null;
-                                    }
-                                }.execute();
-
-                            }else {
-                                //无需下载xml文件，直接解析已存在的xml文件
-                                mHandler.sendEmptyMessage(1);
-                            }
-
-                        }
-
+                        //版本更新
+                        checkVersionInfo(true);
                         break;
                     case 10:
                         //工作笔记
@@ -342,7 +302,6 @@ public class MainActivity extends AppCompatActivity implements SoftUpdateFragmen
 
     }
 
-
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -356,7 +315,9 @@ public class MainActivity extends AppCompatActivity implements SoftUpdateFragmen
                     versionInfoModel = ParseXMLUtils.Parse(inputStream);
                 } catch (Exception e) {
                 } finally {
-                    fragment.dismiss();
+                    if (checkFragment!=null){
+                        checkFragment.dismiss();
+                    }
                     if (versionInfoModel != null) {
                         //版本信息下载完成后，入库
                         List<VersionModel> modelList;
@@ -415,7 +376,9 @@ public class MainActivity extends AppCompatActivity implements SoftUpdateFragmen
                 FuncUtils.installApk(MainActivity.this);
                 //修改下载状态
                 isDowning=false;
-
+            }
+            if (msg.what==6){
+                checkVersionInfo(false);
             }
         }
     };
@@ -464,6 +427,63 @@ public class MainActivity extends AppCompatActivity implements SoftUpdateFragmen
             }
         }.execute();
 
+    }
+
+    //检查是否有新版本 userCheck true:用户主动检测
+
+    void checkVersionInfo(boolean userCheck){
+        //判断网络是否连接
+        if (!FuncUtils.isNetworkAvailable(MainActivity.this)) {
+            if (userCheck){//用户主动检测的，弹出toast，否则不提示
+                FuncUtils.showToast(MainActivity.this, "版本检测需要联网，请联网后再试!");
+            }
+            return;
+        }
+        //版本更新 检查更新规定为1小时 1小时之内不下载新的更新信息
+        List<VersionModel> modelList;
+        modelList = db.findAll(Selector.from(VersionModel.class));
+
+        if (modelList==null||modelList.size()<1||!FuncUtils.checkFileState(FuncUtils.APP_XML_NAME)) {
+//            fragment = SoftUpdateFragment.newInstance(null);
+//            fragment.show(getFragmentManager(), "tag");
+            checkFragment=CheckVersionFragment.newInstance("版本检查中...","");
+            checkFragment.show(getFragmentManager(), "tag");
+            //不存在版本数据、不存在xml文件，必定下载
+            new AsyncTask<Void, Void, Void>() {
+                @Override
+                protected Void doInBackground(Void... params) {
+                    //下载xml文件(版本升级信息)
+                    DownFileUtil util=new DownFileUtil(mHandler);
+                    util.getFile(FuncUtils.APP_UPDATE_URL, FuncUtils.APP_DIR, true);
+
+                    return null;
+                }
+            }.execute();
+        }else{
+            //存在版本数据，比较当前时间与版本数据时间，是否间隔1小时
+            if (FuncUtils.checkUpdateTime(modelList.get(0).getTime())){
+//                fragment = SoftUpdateFragment.newInstance(null);
+//                fragment.show(getFragmentManager(), "tag");
+                checkFragment=CheckVersionFragment.newInstance("版本检查中...","");
+                checkFragment.show(getFragmentManager(), "tag");
+                //大于一小时，下载xml文件
+                new AsyncTask<Void, Void, Void>() {
+                    @Override
+                    protected Void doInBackground(Void... params) {
+                        //下载xml文件(版本升级信息)
+                        DownFileUtil util=new DownFileUtil(mHandler);
+                        util.getFile(FuncUtils.APP_UPDATE_URL, FuncUtils.APP_DIR, true);
+
+                        return null;
+                    }
+                }.execute();
+
+            }else {
+                //无需下载xml文件，直接解析已存在的xml文件
+                mHandler.sendEmptyMessage(1);
+            }
+
+        }
     }
 
 }

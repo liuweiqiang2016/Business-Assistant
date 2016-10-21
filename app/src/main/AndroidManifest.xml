@@ -41,7 +41,9 @@
         <service
             android:name=".service.DownFileService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
+
+        <activity android:name=".activity.EditProjectActivity"></activity>
     </application>
 
 </manifest>

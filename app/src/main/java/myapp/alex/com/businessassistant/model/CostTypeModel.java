@@ -16,6 +16,17 @@ public class CostTypeModel {
     //成本编号
     @Column(column="C_ID")
     private int c_id;
+    //是否隐藏(服务被删除后，隐藏0，显示1)
+    @Column(column = "C_Show")
+    private String show;
+
+    public String getShow() {
+        return show;
+    }
+
+    public void setShow(String show) {
+        this.show = show;
+    }
 
     public String getName() {
         return name;

@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements SoftUpdateFragmen
             //设置服务价格
             model.setPrice((float)1);
 //            //特殊的项目：<item>上衣+裤子（学生、夏）</item>5元/2套
-//            model.setC_id(names.length);
+//            model.setC_id(names_service.length);
 //            //设置服务名称
 //            model.setName("上衣+裤子(学生、夏)");
 //            //设置服务价格
@@ -150,6 +150,8 @@ public class MainActivity extends AppCompatActivity implements SoftUpdateFragmen
                 castModel.setName(castNames[i]);
                 //设置成本编号，唯一
                 castModel.setC_id(i);
+                //设置显示状态
+                castModel.setShow("1");
                 db.save(castModel);
             }
         }
@@ -236,7 +238,8 @@ public class MainActivity extends AppCompatActivity implements SoftUpdateFragmen
                         break;
                     case 3:
                         //项目编辑
-                        intent.setClass(MainActivity.this, EditServiceActivity.class);
+//                        intent.setClass(MainActivity.this, EditServiceActivity.class);
+                        intent.setClass(MainActivity.this, EditProjectActivity.class);
                         startActivity(intent);
                         break;
                     case 4:

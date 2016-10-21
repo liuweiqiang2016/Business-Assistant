@@ -52,7 +52,7 @@ public class AddCostActivity extends AppCompatActivity {
 
     private void initData() {
         db = MyDbUtils.getInstance().Db(this);
-        typeModelList=db.findAll(Selector.from(CostTypeModel.class));
+        typeModelList=db.findAll(Selector.from(CostTypeModel.class).where("C_Show","=","1"));
     }
     private void initView() {
         title= (TextView) customView.findViewById(R.id.action_bar_tv);

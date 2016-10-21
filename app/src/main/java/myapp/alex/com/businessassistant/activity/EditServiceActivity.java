@@ -75,6 +75,11 @@ public class EditServiceActivity extends AppCompatActivity implements EditServic
         adapter.setOnItemClickLitener(new EditServiceAdapter.OnItemClickLitener() {
             @Override
             public void onItemClick(View view, int position) {
+                //如果是特殊项目：其他 不可编辑
+                if(FuncUtils.SPECIAL_SERVICE_NAME.equals(list.get(position).getName())){
+                    FuncUtils.showToast(EditServiceActivity.this,FuncUtils.SPECIAL_SERVICE_NAME+"为特殊项目,不可编辑!");
+                    return;
+                }
                 //编辑服务项
                 EditServiceFragment fragment= EditServiceFragment.newInstance(list.get(position).getName(),list.get(position).getC_id()+"",list.get(position).getPrice()+"",position);
                 fragment.show(getFragmentManager(),"tag");
@@ -83,6 +88,11 @@ public class EditServiceActivity extends AppCompatActivity implements EditServic
 
             @Override
             public void onItemLongClick(View view, int position) {
+                //如果是特殊项目：其他 不可编辑
+                if(FuncUtils.SPECIAL_SERVICE_NAME.equals(list.get(position).getName())){
+                    FuncUtils.showToast(EditServiceActivity.this,FuncUtils.SPECIAL_SERVICE_NAME+"为特殊项目,不可删除!");
+                    return;
+                }
                 //删除服务项
                 DeleteServiceFragment fragment=DeleteServiceFragment.newInstance(list.get(position).getName(),list.get(position).getC_id()+"",list.get(position).getPrice()+"",position);
                 fragment.show(getFragmentManager(),"tag");

@@ -166,10 +166,12 @@ public class DataAnalyzeActivity extends AppCompatActivity implements DataSettin
             //获得成本类型
             List<String> types=new ArrayList<>();
             types.clear();
-            for(CostModel model:costModels){
-                //添加的时候，注意去除重复类型数据
-                if (!types.contains(model.getType())){
-                    types.add(model.getType());
+            if (costModels!=null){
+                for(CostModel model:costModels){
+                    //添加的时候，注意去除重复类型数据
+                    if (!types.contains(model.getType())){
+                        types.add(model.getType());
+                    }
                 }
             }
             List<Float> typeCosts=new ArrayList<>();
@@ -185,15 +187,17 @@ public class DataAnalyzeActivity extends AppCompatActivity implements DataSettin
             ChartUtil.showPieChart(mPieChart, mPieData,start+"至"+end+"期间开支数据统计","各类开支百分比");
 
             //---------------------展示利润信息-----------------
-            data_tv_profit.setText("本段时间内，收入总额为"+total_income+"元，支出总额为"+total_cost+"元，净利润为"+(total_income-total_cost)+"元");
+            data_tv_profit.setText("本段时间内，收入总额为"+total_income+"元，支出总额为"+total_cost+"元，净利润为"+FuncUtils.accuracyFloat(total_income,total_cost)+"元");
 
             //--------------------展示客户信息-----------------
             //存放所有消费者的名称
             List<String> names=new ArrayList<>();
             names.clear();
-            for (int i = 0; i < orderModels.size(); i++) {
-                if (!names.contains(orderModels.get(i).getName())){
-                    names.add(orderModels.get(i).getName());
+            if (orderModels!=null){
+                for (int i = 0; i < orderModels.size(); i++) {
+                    if (!names.contains(orderModels.get(i).getName())){
+                        names.add(orderModels.get(i).getName());
+                    }
                 }
             }
 
@@ -269,83 +273,87 @@ public class DataAnalyzeActivity extends AppCompatActivity implements DataSettin
 
 
 
-    private void showViewByPosition(int position) {
-        try {
-            switch (position){
-                //特定时间段的收入数据展示、折线图
-                case 0:
-                    //设置控件显示状态
-                    mLineChart.setVisibility(View.VISIBLE);
-                    mPieChart.setVisibility(View.GONE);
-                    //由数据库查询，修改为内存查询
-                    orderModels=db.findAll(Selector.from(OrderModel.class).where("C_Time",">",start+" 00:00:00").and("C_Time","<",end+" 00:00:00"));
-                    int size=FuncUtils.daysBetween(start,end);
-                    SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-                    Calendar cal = Calendar.getInstance();
-                    cal.setTime(sdf.parse(start));
-                    long time = cal.getTimeInMillis();
-                    //存放每天的日期
-                    List<String> days=new ArrayList<>();
-                    days.clear();
-                    for (int i=0;i<size;i++){
-                        //添加日期 1L防止数据溢出
-                        days.add(sdf.format((1L*i*(1000*3600*24)+time)));
-                    }
-                    //存放每天的收入总额
-                    List<Float> dayIncomes=new ArrayList<>();
-                    dayIncomes.clear();
-                    for (int i=0;i<size;i++){
-                        dayIncomes.add(QueryDayIncome(days.get(i)));
-                    }
-                    LineData mLineData = ChartUtil.getLineData(days,dayIncomes,start+"至"+end+"期间内收入数据统计");
-                    ChartUtil.showLineChart(mLineChart, mLineData, Color.rgb(114, 188, 223));
-                    break;
-                //特定时间段内的开支数据展示、饼图
-                case 1:
-                    //设置控件显示状态
-                    mPieChart.setVisibility(View.VISIBLE);
-                    mLineChart.setVisibility(View.GONE);
-                    //查询数据
-                    costModels=db.findAll(Selector.from(CostModel.class).where("C_Time",">",start).and("C_Time","<",end));
-                    if (costModels==null||costModels.size()<1){
-                        FuncUtils.showToast(this, start+"至"+end+"期间内，无任何开支入账!");
-                        return;
-                    }
-                    //获得成本类型
-                    List<String> types=new ArrayList<>();
-                    types.clear();
-                    for(CostModel model:costModels){
-                        //添加的时候，注意去除重复类型数据
-                        if (!types.contains(model.getType())){
-                            types.add(model.getType());
-                        }
-                    }
-                    List<Float> typeCosts=new ArrayList<>();
-                    typeCosts.clear();
-                    //获得成本数据
-                    for(int i=0;i<types.size();i++){
-                        typeCosts.add(QueryTypeCost(types.get(i)));
-                    }
-
-                    PieData mPieData = ChartUtil.getPieData(types,typeCosts,this);
-                    ChartUtil.showPieChart(mPieChart, mPieData,start+"至"+end+"期间内开支数据统计","各类开支百分比");
-                    break;
-                case 2:break;
-                case 3:break;
-                case 4:break;
-            }
-
-        }catch (Exception e){
-
-        }
-    }
+//    private void showViewByPosition(int position) {
+//        try {
+//            switch (position){
+//                //特定时间段的收入数据展示、折线图
+//                case 0:
+//                    //设置控件显示状态
+//                    mLineChart.setVisibility(View.VISIBLE);
+//                    mPieChart.setVisibility(View.GONE);
+//                    //由数据库查询，修改为内存查询
+//                    orderModels=db.findAll(Selector.from(OrderModel.class).where("C_Time",">",start+" 00:00:00").and("C_Time","<",end+" 00:00:00"));
+//                    int size=FuncUtils.daysBetween(start,end);
+//                    SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+//                    Calendar cal = Calendar.getInstance();
+//                    cal.setTime(sdf.parse(start));
+//                    long time = cal.getTimeInMillis();
+//                    //存放每天的日期
+//                    List<String> days=new ArrayList<>();
+//                    days.clear();
+//                    for (int i=0;i<size;i++){
+//                        //添加日期 1L防止数据溢出
+//                        days.add(sdf.format((1L*i*(1000*3600*24)+time)));
+//                    }
+//                    //存放每天的收入总额
+//                    List<Float> dayIncomes=new ArrayList<>();
+//                    dayIncomes.clear();
+//                    for (int i=0;i<size;i++){
+//                        dayIncomes.add(QueryDayIncome(days.get(i)));
+//                    }
+//                    LineData mLineData = ChartUtil.getLineData(days,dayIncomes,start+"至"+end+"期间内收入数据统计");
+//                    ChartUtil.showLineChart(mLineChart, mLineData, Color.rgb(114, 188, 223));
+//                    break;
+//                //特定时间段内的开支数据展示、饼图
+//                case 1:
+//                    //设置控件显示状态
+//                    mPieChart.setVisibility(View.VISIBLE);
+//                    mLineChart.setVisibility(View.GONE);
+//                    //查询数据
+//                    costModels=db.findAll(Selector.from(CostModel.class).where("C_Time",">",start).and("C_Time","<",end));
+//                    if (costModels==null||costModels.size()<1){
+//                        FuncUtils.showToast(this, start+"至"+end+"期间内，无任何开支入账!");
+//                        return;
+//                    }
+//                    //获得成本类型
+//                    List<String> types=new ArrayList<>();
+//                    types.clear();
+//                    for(CostModel model:costModels){
+//                        //添加的时候，注意去除重复类型数据
+//                        if (!types.contains(model.getType())){
+//                            types.add(model.getType());
+//                        }
+//                    }
+//                    List<Float> typeCosts=new ArrayList<>();
+//                    typeCosts.clear();
+//                    //获得成本数据
+//                    for(int i=0;i<types.size();i++){
+//                        typeCosts.add(QueryTypeCost(types.get(i)));
+//                    }
+//
+//                    PieData mPieData = ChartUtil.getPieData(types,typeCosts,this);
+//                    ChartUtil.showPieChart(mPieChart, mPieData,start+"至"+end+"期间内开支数据统计","各类开支百分比");
+//                    break;
+//                case 2:break;
+//                case 3:break;
+//                case 4:break;
+//            }
+//
+//        }catch (Exception e){
+//
+//        }
+//    }
 
     //获得每种类型的开支
     private  float QueryTypeCost(String type){
         float total=0;
-        for(CostModel model:costModels){
-            if (model.getType().equals(type)){
-                total=total+Float.parseFloat(model.getMoney());
+        if (costModels==null){
+            total=0;
+        }else {
+            for(CostModel model:costModels){
+                if (model.getType().equals(type)){
+                    total=total+Float.parseFloat(model.getMoney());
+                }
             }
         }
         return total;
@@ -354,9 +362,13 @@ public class DataAnalyzeActivity extends AppCompatActivity implements DataSettin
     //获得每天的收入
     private  float QueryDayIncome(String date){
         float total=0;
-        for(OrderModel model:orderModels){
-            if (model.getTime().contains(date)){
-                total=total+Float.parseFloat(model.getTotal());
+        if (orderModels==null){
+            total=0;
+        }else{
+            for(OrderModel model:orderModels){
+                if (model.getTime().contains(date)){
+                    total=total+Float.parseFloat(model.getTotal());
+                }
             }
         }
         return total;

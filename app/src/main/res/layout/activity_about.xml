@@ -58,6 +58,14 @@
             >
         </android.support.v7.widget.RecyclerView>
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/zfb"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="3dp"
+            />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -65,7 +73,6 @@
             android:textSize="17sp"
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"
-            android:layout_marginTop="3dp"
             android:layout_marginBottom="3dp"
             android:textColor="@android:color/black"
             android:textColorLink="@android:color/holo_blue_dark"

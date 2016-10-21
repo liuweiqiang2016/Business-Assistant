@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -31,6 +32,7 @@ public class FuncUtils {
     public static final String APP_UPDATE_URL= "https://raw.githubusercontent.com/liuweiqiang2016/Business-Assistant/master/app/versioninfo.xml";
     public static final String APP_DOWNFILE_NAME ="BusinessAssistant.apk";
     public static final String APP_XML_NAME ="versioninfo.xml";
+    public static final String SPECIAL_SERVICE_NAME ="其他";
 
     // 获取当前时间
     public static String getTime() {
@@ -308,6 +310,17 @@ public class FuncUtils {
 //            tu.setBackgroundDrawable(icon);
         }
         return version;
+    }
+
+    //返回两个float数相减保留精度后的数
+    public static Float accuracyFloat(float m,float c){
+
+        Float less = 0f;
+        BigDecimal b1 = new BigDecimal(Float.toString(m));
+        BigDecimal b2 = new BigDecimal(Float.toString(c));
+//        Float add = b1.add(b2).floatValue();
+        less = b1.subtract(b2).floatValue();
+        return less;
     }
 
 

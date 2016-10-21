@@ -40,7 +40,8 @@ public class DownFileUtil {
         final String fileName;
         if (check) {
             //若下载xml文件
-            fileName = url.substring(url.lastIndexOf("/") + 1);
+//            fileName = url.substring(url.lastIndexOf("/") + 1);
+            fileName = FuncUtils.APP_XML_NAME;
         } else {
             //若下载apk文件
             fileName = FuncUtils.APP_DOWNFILE_NAME;
@@ -81,6 +82,9 @@ public class DownFileUtil {
                 if (check) {
                     //下载版本更新信息xml文件失败
                     mHandler.sendEmptyMessage(2);
+                }else{
+                    //下载apk文件失败
+                    mHandler.sendEmptyMessage(6);
                 }
 
             }

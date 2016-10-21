@@ -125,12 +125,18 @@ public class MainActivity extends AppCompatActivity implements SoftUpdateFragmen
                 model.setShow("1");
                 db.save(model);
             }
-            //特殊的项目：<item>上衣+裤子（学生、夏）</item>5元/2套
+            //特殊项目 其他 单价为0, 不可删除和编辑
             model.setC_id(names.length);
             //设置服务名称
-            model.setName("上衣+裤子(学生、夏)");
+            model.setName(FuncUtils.SPECIAL_SERVICE_NAME);
             //设置服务价格
-            model.setPrice((float) 2.5);
+            model.setPrice((float)1);
+//            //特殊的项目：<item>上衣+裤子（学生、夏）</item>5元/2套
+//            model.setC_id(names.length);
+//            //设置服务名称
+//            model.setName("上衣+裤子(学生、夏)");
+//            //设置服务价格
+//            model.setPrice((float) 2.5);
             db.save(model);
         }
         List<CostTypeModel> costModelList;
@@ -147,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements SoftUpdateFragmen
                 db.save(castModel);
             }
         }
-        //软件打开10s后，检测版本 牺牲用户体验（去除）且会崩溃
+        //软件打开10s后，启动service检测版本 牺牲用户体验（去除）
 //        mHandler.sendEmptyMessageDelayed(6,10*1000);
     }
 
@@ -350,8 +356,8 @@ public class MainActivity extends AppCompatActivity implements SoftUpdateFragmen
 
             }
             if (msg.what == 2) {
-                if (fragment!=null){
-                    fragment.dismiss();
+                if (checkFragment!=null){
+                    checkFragment.dismiss();
                 }
                 FuncUtils.showToast(MainActivity.this, "网络异常，版本检测失败，请稍后再试!");
             }
@@ -378,7 +384,10 @@ public class MainActivity extends AppCompatActivity implements SoftUpdateFragmen
                 isDowning=false;
             }
             if (msg.what==6){
-                checkVersionInfo(false);
+                if (progressFragment!=null){
+                    progressFragment.dismiss();
+                }
+                FuncUtils.showToast(MainActivity.this, "网络异常，版本检测失败，请稍后再试!");
             }
         }
     };

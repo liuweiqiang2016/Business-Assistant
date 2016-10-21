@@ -81,7 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/tv_nums"
             android:layout_centerVertical="true"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:layout_marginLeft="5dp"
             android:textSize="15sp"
             android:textColor="@android:color/black"

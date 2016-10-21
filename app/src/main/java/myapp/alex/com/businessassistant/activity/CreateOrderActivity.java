@@ -168,7 +168,9 @@ public class CreateOrderActivity extends AppCompatActivity implements CreateOrde
         list.add(orderServiceModel);
         orderAdapter.notifyDataSetChanged();
 
-        total = total + (model.getPrice() * Integer.parseInt(num));
+//        total = total + (model.getPrice() * Integer.parseInt(num));
+        //数量修改为float形式
+        total = total + (model.getPrice() *Float.parseFloat(num));
         money.setText("总金额:" + total + "元");
 
     }

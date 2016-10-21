@@ -66,14 +66,12 @@ public class SoftUpdateFragment extends DialogFragment {
         des= (TextView) view.findViewById(R.id.tv_update_des);
         title= (TextView) view.findViewById(R.id.tv_update_title);
         lin= (LinearLayout) view.findViewById(R.id.update_lin);
-
-        if (versionInfoModel==null){
-            title.setText("版本检测中，请稍后...");
-            lin.setVisibility(View.GONE);
-            builder.setView(view);
-            return builder.create();
-        }
-
+//        if (versionInfoModel==null){
+//            title.setText("版本检测中，请稍后...");
+//            lin.setVisibility(View.GONE);
+//            builder.setView(view);
+//            return builder.create();
+//        }
         initData();
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout

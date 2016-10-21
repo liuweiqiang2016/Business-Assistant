@@ -19,40 +19,18 @@
     </string-array>
 
     <string-array name="model_name">
-        <item>西装上衣</item>
+        <item>西装</item>
         <item>毛衣</item>
-        <item>短大衣</item>
-        <item>长大衣</item>
-        <item>睡衣(夏)</item>
-        <item>睡衣(冬)</item>
-        <item>羽绒服(长)</item>
-        <item>羽绒服(短)</item>
-        <item>棉衣(长)</item>
-        <item>棉衣(中)</item>
-        <item>棉衣(短)</item>
-        <item>床单/被罩(学生)</item>
-        <item>裤子+外套+秋衣(学生、春秋)</item>
-        <item>薄内衣(学生、冬)</item>
-        <item>保暖内衣(学生、冬)</item>
-        <item>背包(学生)</item>
+        <item>大衣</item>
+        <item>睡衣</item>
+        <item>羽绒服</item>
     </string-array>
     <integer-array name="model_price">
         <item>6</item>
         <item>20</item>
         <item>25</item>
-        <item>30</item>
         <item>5</item>
-        <item>6</item>
         <item>30</item>
-        <item>25</item>
-        <item>25</item>
-        <item>20</item>
-        <item>15</item>
-        <item>7</item>
-        <item>6</item>
-        <item>5</item>
-        <item>6</item>
-        <item>10</item>
     </integer-array>
 
     <string-array name="cost_name">
@@ -137,12 +115,14 @@
         <item>开发者</item>
         <item>资料</item>
         <item>邮箱</item>
+        <item>捐赠</item>
     </string-array>
 
     <string-array name="about_dev_info">
         <item>liuweiqiang</item>
         <item>https://github.com/liuweiqiang2016</item>
         <item>liu.weiqiang@foxmail.com</item>
+        <item>如果您认为本app对您有很大帮助，且您有富余的钱财，欢迎向我捐赠，衷心感谢您的援助。</item>
     </string-array>
     <string-array name="about_thank_links">
         <item>https://github.com/wyouflf/xUtils</item>

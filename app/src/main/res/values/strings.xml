@@ -37,8 +37,6 @@
         <item>房租</item>
         <item>水费</item>
         <item>电费</item>
-        <item>汽油费</item>
-        <item>耗材费</item>
         <item>通讯费</item>
         <item>其他</item>
     </string-array>

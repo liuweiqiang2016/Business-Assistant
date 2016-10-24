@@ -129,7 +129,7 @@ public class QueryNoteActivity extends AppCompatActivity implements NoteSettingF
     private void ShowView() {
         //更新界面
         if(list==null||list.size()<1){
-            FuncUtils.showToast(this, "没有满足所选查询条件下的客户信息，请重新设置查询条件!");
+            FuncUtils.showToast(this, "没有满足所选查询条件下的笔记信息，请重新设置查询条件!");
             if (list==null){
                 list=new ArrayList<>();
             }

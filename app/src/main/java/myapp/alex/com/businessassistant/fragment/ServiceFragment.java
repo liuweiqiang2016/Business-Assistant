@@ -116,12 +116,18 @@ public class ServiceFragment extends Fragment {
         rv.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL_LIST));
     }
 
+    //增加一个标识，去除长按后，执行点击的事件
+    boolean pushLong=false;
     private void initEvent() {
         adapter.setOnItemClickLitener(new EditServiceAdapter.OnItemClickLitener() {
             @Override
             public void onItemClick(View view, int position) {
                 //如果是特殊项目：其他 不可编辑
                 if(FuncUtils.SPECIAL_SERVICE_NAME.equals(mList.get(position).getName())){
+                    if (pushLong){
+                        pushLong=false;
+                        return;
+                    }
                     FuncUtils.showToast(mContext,FuncUtils.SPECIAL_SERVICE_NAME+"为特殊项目,不可编辑!");
                     return;
                 }
@@ -136,6 +142,7 @@ public class ServiceFragment extends Fragment {
                 //如果是特殊项目：其他 不可编辑
                 if(FuncUtils.SPECIAL_SERVICE_NAME.equals(mList.get(position).getName())){
                     FuncUtils.showToast(mContext,FuncUtils.SPECIAL_SERVICE_NAME+"为特殊项目,不可删除!");
+                    pushLong=true;
                     return;
                 }
                 //删除服务项

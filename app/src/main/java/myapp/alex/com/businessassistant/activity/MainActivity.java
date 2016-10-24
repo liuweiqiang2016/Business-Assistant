@@ -126,18 +126,18 @@ public class MainActivity extends AppCompatActivity implements SoftUpdateFragmen
                 db.save(model);
             }
             //特殊项目 其他 单价为0, 不可删除和编辑
-            model.setC_id(names.length);
-            //设置服务名称
-            model.setName(FuncUtils.SPECIAL_SERVICE_NAME);
-            //设置服务价格
-            model.setPrice((float)1);
+//            model.setC_id(names.length);
+//            //设置服务名称
+//            model.setName(FuncUtils.SPECIAL_SERVICE_NAME);
+//            //设置服务价格
+//            model.setPrice((float)1);
 //            //特殊的项目：<item>上衣+裤子（学生、夏）</item>5元/2套
 //            model.setC_id(names_service.length);
 //            //设置服务名称
 //            model.setName("上衣+裤子(学生、夏)");
 //            //设置服务价格
 //            model.setPrice((float) 2.5);
-            db.save(model);
+//            db.save(model);
         }
         List<CostTypeModel> costModelList;
         costModelList = db.findAll(Selector.from(CostTypeModel.class));

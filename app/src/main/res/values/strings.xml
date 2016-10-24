@@ -24,6 +24,7 @@
         <item>大衣</item>
         <item>睡衣</item>
         <item>羽绒服</item>
+        <item>其他</item>
     </string-array>
     <integer-array name="model_price">
         <item>6</item>
@@ -31,6 +32,7 @@
         <item>25</item>
         <item>5</item>
         <item>30</item>
+        <item>1</item>
     </integer-array>
 
     <string-array name="cost_name">

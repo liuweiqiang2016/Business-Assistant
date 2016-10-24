@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,13 +17,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import myapp.alex.com.businessassistant.R;
-import myapp.alex.com.businessassistant.activity.EditProjectActivity;
-import myapp.alex.com.businessassistant.activity.EditServiceActivity;
 import myapp.alex.com.businessassistant.adapter.EditServiceAdapter;
 import myapp.alex.com.businessassistant.model.ServiceModel;
 import myapp.alex.com.businessassistant.utils.DividerItemDecoration;
 import myapp.alex.com.businessassistant.utils.FuncUtils;
-import myapp.alex.com.businessassistant.utils.MyDbUtils;
 
 /**
  * A simple {@link Fragment} subclass.

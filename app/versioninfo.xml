@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
       <version>  
-        <code>1.0.0.8</code>
+        <code>1.0.0.1</code>
         <name>小店管家</name>
         <size>1.87MB</size>
         <des>增加版本更新功能，修复若干轻微bug</des>

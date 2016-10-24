@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-
+o
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_store_blue_400_48dp"
@@ -23,7 +23,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.EditServiceActivity" />
         <activity android:name=".activity.CreateOrderActivity" />
         <activity android:name=".activity.UnDoneActivity" />
         <activity android:name=".activity.OrderDetailActivity" />
@@ -37,12 +36,6 @@
         <activity android:name=".activity.DataAnalyzeActivity" />
         <activity android:name=".activity.ManualActivity" />
         <activity android:name=".activity.AboutActivity" />
-
-        <service
-            android:name=".service.DownFileService"
-            android:enabled="true"
-            android:exported="true" />
-
         <activity android:name=".activity.EditProjectActivity"></activity>
     </application>
 

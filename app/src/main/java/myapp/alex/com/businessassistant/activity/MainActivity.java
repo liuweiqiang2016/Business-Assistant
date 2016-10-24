@@ -238,7 +238,6 @@ public class MainActivity extends AppCompatActivity implements SoftUpdateFragmen
                         break;
                     case 3:
                         //项目编辑
-//                        intent.setClass(MainActivity.this, EditServiceActivity.class);
                         intent.setClass(MainActivity.this, EditProjectActivity.class);
                         startActivity(intent);
                         break;
